@@ -6,75 +6,78 @@
     <title>ANFA ÖGG AKADEMİ</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <div class="water-bg"></div>
+<div id="splash">
+    <img src="anfa.gif" class="splash-gif">
+</div>
 
-    <div id="splash">
-        <img src="anfa.gif" class="splash-gif">
+<div class="water-bg"></div>
+
+<header id="main-header" style="display:none;">
+    <div class="logo"><strong>ANFA</strong> <span>ÖGG</span></div>
+    <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-cog"></i></button>
+</header>
+
+<div id="side-menu" class="side-menu">
+    <div class="menu-header">AYARLAR</div>
+    <button onclick="adminGiris()"><i class="fas fa-user-edit"></i> Soru/Cevap Editörü</button>
+    <button onclick="istatistikSifirla()"><i class="fas fa-trash"></i> Verileri Sıfırla</button>
+    <hr>
+    <button onclick="toggleMenu()" class="close-btn">Kapat</button>
+</div>
+
+<div id="entry-screen" class="container" style="display:none;">
+    <div class="glass-card fade-in">
+        <h2>SINAV SEÇİMİ</h2>
+        <div class="selection-grid">
+            <div id="opt-silahli" class="opt active" onclick="setTur('silahli')">SİLAHLI</div>
+            <div id="opt-silahsiz" class="opt" onclick="setTur('silahsiz')">SİLAHSIZ</div>
+        </div>
+        <div class="selection-grid">
+            <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
+            <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
+        </div>
+        <button class="glow-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
+    </div>
+</div>
+
+<div id="quiz-screen" class="container" style="display:none;">
+    <div class="quiz-header">
+        <span id="timer">165:00</span>
+        <span id="q-counter">Soru: 1/120</span>
     </div>
 
-    <header id="main-header" style="display:none;">
-        <div class="logo-area"><strong>ANFA</strong> <span>AKADEMİ</span></div>
-        <button class="menu-trigger" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-    </header>
-
-    <div id="side-menu" class="side-menu">
-        <div class="menu-content">
-            <h3>YÖNETİM</h3>
-            <button onclick="adminGiris()"><i class="fas fa-lock"></i> Cevap Anahtarı</button>
-            <button onclick="location.reload()"><i class="fas fa-sync"></i> Güncelle</button>
-            <button onclick="toggleMenu()" class="close-btn">Kapat</button>
-        </div>
+    <div class="question-container glass-card">
+        <img id="q-img" src="" alt="Soru Bekleniyor...">
     </div>
 
-    <div id="entry-screen" class="container" style="display:none;">
-        <div class="glass-card">
-            <h2>SINAV TÜRÜ</h2>
-            <div class="selection-box">
-                <div id="opt-silahli" class="option active" onclick="setTur('silahli')">Silahlı</div>
-                <div id="opt-silahsiz" class="option" onclick="setTur('silahsiz')">Silahsız</div>
-            </div>
-        </div>
-        <div class="glass-card">
-            <h2>MOD</h2>
-            <div class="selection-box">
-                <div id="opt-sureli" class="option active" onclick="setMod('sureli')">Süreli</div>
-                <div id="opt-suresiz" class="option" onclick="setMod('suresiz')">Süresiz</div>
-            </div>
-        </div>
-        <button class="glow-button" onclick="sinaviBaslat()">BAŞLAT</button>
+    <div class="options-area" id="options-parent">
+        <button class="choice-btn" onclick="cevapla('A', this)">A</button>
+        <button class="choice-btn" onclick="cevapla('B', this)">B</button>
+        <button class="choice-btn" onclick="cevapla('C', this)">C</button>
+        <button class="choice-btn" onclick="cevapla('D', this)">D</button>
+        <button class="choice-btn" onclick="cevapla('E', this)">E</button>
     </div>
+</div>
 
-    <div id="quiz-screen" class="container" style="display:none;">
-        <div class="top-info">
-            <span id="timer">165:00</span>
-            <span id="q-counter">Soru: 1</span>
-        </div>
-
-        <div class="question-box glass-card">
-            <img id="question-image" src="" alt="Soru Yükleniyor...">
-        </div>
-
-        <div class="options-grid" id="options-container">
-            <button class="opt-btn" onclick="cevapla('A', this)">A</button>
-            <button class="opt-btn" onclick="cevapla('B', this)">B</button>
-            <button class="opt-btn" onclick="cevapla('C', this)">C</button>
-            <button class="opt-btn" onclick="cevapla('D', this)">D</button>
-            <button class="opt-btn" onclick="cevapla('E', this)">E</button>
+<div id="admin-panel" class="modal" style="display:none;">
+    <div class="modal-content glass-card">
+        <h3>SINAV EDİTÖRÜ</h3>
+        <p>Cevap Anahtarı (120 Harf):</p>
+        <textarea id="cevap-anahtari-input" placeholder="ABCDE..."></textarea>
+        <p>Görsel Klasör Yolu (Opsiyonel):</p>
+        <input type="text" id="img-path-input" placeholder="Varsayılan: Ana Dizin">
+        <div class="btn-group">
+            <button class="save-btn" onclick="kaydetAdmin()">KAYDET</button>
+            <button class="cancel-btn" onclick="closeAdmin()">KAPAT</button>
         </div>
     </div>
+</div>
 
-    <div id="admin-modal" class="modal" style="display:none;">
-        <div class="modal-content glass-card">
-            <h3>Cevap Anahtarı</h3>
-            <textarea id="cevap-input" rows="6"></textarea>
-            <button class="glow-button" onclick="kaydetAdmin()">KAYDET</button>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
