@@ -1,32 +1,32 @@
-:root { --accent: #00d2ff; --correct: #2ecc71; --wrong: #e74c3c; --bg: #0a0e14; }
-body { margin: 0; background: var(--bg); color: white; font-family: sans-serif; overflow: hidden; }
+:root { --accent: #00d2ff; --correct: #2ecc71; --wrong: #e74c3c; }
+body { margin: 0; background: #0a0e14; color: white; font-family: 'Poppins', sans-serif; overflow: hidden; }
 
-#splash { position: fixed; inset: 0; background: black; z-index: 10000; display: flex; }
+/* Splash */
+#splash { position: fixed; inset: 0; background: black; z-index: 10000; display: flex; justify-content: center; align-items: center; }
 .splash-gif { width: 100%; height: 100%; object-fit: cover; }
 
-.water-bg { position: fixed; inset: 0; z-index: -1; background: linear-gradient(to bottom, #0a0e14, #001f3f); }
+/* Background */
+.water-bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at top, #16213e 0%, #0a0e14 100%); }
 
-header { display: flex; justify-content: space-between; padding: 15px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+/* Glass Design */
+.glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 20px; }
 
-.container { padding: 15px; max-width: 500px; margin: auto; height: calc(100vh - 70px); overflow-y: auto; }
-.glass-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); }
+/* Soru Görseli */
+.question-container { text-align: center; margin-bottom: 20px; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+#q-img { max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-/* Soru Resmi Ayarı */
-.question-box { padding: 5px; overflow: hidden; display: flex; justify-content: center; }
-#question-image { max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+/* Butonlar */
+.choice-btn { width: 100%; height: 55px; margin: 5px 0; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+.choice-btn.correct { background: var(--correct) !important; border-color: var(--correct); transform: scale(1.05); }
+.choice-btn.wrong { background: var(--wrong) !important; border-color: var(--wrong); }
 
-.selection-box { display: flex; gap: 10px; margin-top: 10px; }
-.option { flex: 1; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; text-align: center; cursor: pointer; }
-.option.active { background: var(--accent); color: black; font-weight: bold; }
+/* PWA Responsive */
+@media (max-width: 600px) {
+    .container { width: 95%; margin: 80px auto; }
+}
 
-.glow-button { width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px var(--accent); }
+.selection-grid { display: flex; gap: 10px; margin: 15px 0; }
+.opt { flex: 1; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 15px; text-align: center; cursor: pointer; }
+.opt.active { background: var(--accent); color: black; font-weight: bold; }
 
-.options-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
-.opt-btn { height: 55px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 18px; font-weight: bold; cursor: pointer; }
-
-.opt-btn.correct { background: var(--correct) !important; border-color: var(--correct); }
-.opt-btn.wrong { background: var(--wrong) !important; border-color: var(--wrong); }
-
-.side-menu { position: fixed; right: -300px; top: 0; width: 250px; height: 100%; background: #000; transition: 0.3s; z-index: 1000; padding: 20px; }
-.side-menu.active { right: 0; }
-.side-menu button { width: 100%; margin: 10px 0; padding: 12px; background: #222; color: white; border: none; border-radius: 8px; text-align: left; }
+.glow-btn { width: 100%; padding: 18px; border-radius: 50px; background: var(--accent); border: none; font-weight: bold; box-shadow: 0 0 20px var(--accent); cursor: pointer; margin-top: 20px; }
