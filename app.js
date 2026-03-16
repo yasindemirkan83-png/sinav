@@ -1,19 +1,20 @@
-let index = 0, dogruS = 0, sure = 165*60, timer, aktifSorular = [], tumVeri = [];
+let index = 0, dogruS = 0, sure = 165 * 60, timer, aktifSorular = [], tumVeri = [];
 let tur = 'silahli', mod = 'sureli';
 
-window.onload = () => {
-    // 5 Saniyelik Splash Ekranı
+window.onload = async () => {
     setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
         document.getElementById('main-header').style.display = 'flex';
         document.getElementById('entry-screen').style.display = 'block';
     }, 5000);
 
-    // Soruları JSON'dan Yükle
-    fetch('sorular.json')
-        .then(res => res.json())
-        .then(data => { tumVeri = data; })
-        .catch(err => console.error("Soru yükleme hatası kanki:", err));
+    try {
+        const response = await fetch('sorular.json');
+        if (!response.ok) throw new Error("JSON bulunamadı");
+        tumVeri = await response.json();
+    } catch (err) {
+        console.error("HATA:", err);
+    }
 };
 
 function setTur(t) { 
@@ -29,9 +30,13 @@ function setMod(m) {
 }
 
 function sinaviBaslat() {
-    if(tumVeri.length === 0) return alert("Sorular henüz hazır değil, lütfen bekleyin.");
-    aktifSorular = (tur === 'silahli') ? tumVeri : tumVeri.slice(0, 100);
+    if(!tumVeri || tumVeri.length === 0) return alert("Sorular yükleniyor, lütfen bekle.");
     
+    // Soruları kopyala ve karıştır
+    let tempSorular = (tur === 'silahli') ? [...tumVeri] : [...tumVeri.slice(0, 100)];
+    aktifSorular = tempSorular.sort(() => Math.random() - 0.5);
+    
+    index = 0; dogruS = 0;
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
     
@@ -40,7 +45,11 @@ function sinaviBaslat() {
 }
 
 function soruGoster() {
+    window.scrollTo(0, 0);
     const s = aktifSorular[index];
+    const butonlar = document.querySelectorAll('.choice-btn');
+    butonlar.forEach(b => b.classList.remove('correct', 'wrong'));
+
     document.getElementById('q-text').innerText = (index + 1) + ". " + s.soru;
     document.getElementById('btn-A').innerText = "A) " + s.a;
     document.getElementById('btn-B').innerText = "B) " + s.b;
@@ -52,21 +61,17 @@ function soruGoster() {
 
 function cevapla(secim, btn) {
     const dogruCevap = aktifSorular[index].cevap;
-    const butonlar = document.querySelectorAll('.choice-btn');
-    document.getElementById('options-parent').style.pointerEvents = 'none'; // Çift tıklamayı engelle
+    document.getElementById('options-parent').style.pointerEvents = 'none';
 
     if(secim === dogruCevap) {
         btn.classList.add('correct');
         dogruS++;
     } else {
         btn.classList.add('wrong');
-        // Yanlış yapınca doğruyu göster
         document.getElementById('btn-' + dogruCevap).classList.add('correct');
     }
 
-    // 1.2 SANİYE BEKLE VE GEÇ
     setTimeout(() => {
-        butonlar.forEach(b => b.classList.remove('correct', 'wrong'));
         document.getElementById('options-parent').style.pointerEvents = 'auto';
         index++;
         if(index < aktifSorular.length) soruGoster(); else sinavBitir();
@@ -75,7 +80,7 @@ function cevapla(secim, btn) {
 
 function sinavBitir() {
     clearInterval(timer);
-    alert(`Sınav Bitti! Başarı Durumu: ${dogruS} Doğru / ${aktifSorular.length} Soru.`);
+    alert(`Sınav Bitti! Skor: ${dogruS} Doğru / ${aktifSorular.length} Soru.`);
     location.reload();
 }
 
@@ -88,4 +93,6 @@ function baslatTimer() {
     }, 1000);
 }
 
-function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
+function toggleMenu() {
+    alert("ANFA Akademi - Sürüm 1.0");
+}
