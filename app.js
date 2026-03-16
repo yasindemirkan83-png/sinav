@@ -1,32 +1,36 @@
-let index = 0, dogruS = 0, sure = 165*60, timer, aktifSorular = [], cevapAnahtari = [], ogrenciCevaplari = [];
+let index = 0, dogruS = 0, sure = 165*60, timer, aktifSorular = [], tumVeri = [];
 let tur = 'silahli', mod = 'sureli';
 
 window.onload = () => {
-    // Splash
+    // 5 Saniyelik Splash Ekranı
     setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
         document.getElementById('main-header').style.display = 'flex';
         document.getElementById('entry-screen').style.display = 'block';
     }, 5000);
 
-    // Hafızadan Yükle
-    const saved = localStorage.getItem('anfa_v5');
-    if(saved) {
-        const data = JSON.parse(saved);
-        cevapAnahtari = data.cevaplar;
-    }
+    // Soruları JSON'dan Yükle
+    fetch('sorular.json')
+        .then(res => res.json())
+        .then(data => { tumVeri = data; })
+        .catch(err => console.error("Soru yükleme hatası kanki:", err));
 };
 
-function setTur(t) { tur = t; toggleClass('opt-silahli', 'opt-silahsiz', t === 'silahli'); }
-function setMod(m) { mod = m; toggleClass('opt-sureli', 'opt-suresiz', m === 'sureli'); }
-function toggleClass(id1, id2, isFirst) {
-    document.getElementById(id1).classList.toggle('active', isFirst);
-    document.getElementById(id2).classList.toggle('active', !isFirst);
+function setTur(t) { 
+    tur = t; 
+    document.getElementById('opt-silahli').classList.toggle('active', t === 'silahli');
+    document.getElementById('opt-silahsiz').classList.toggle('active', t === 'silahsiz');
+}
+
+function setMod(m) { 
+    mod = m; 
+    document.getElementById('opt-sureli').classList.toggle('active', m === 'sureli');
+    document.getElementById('opt-suresiz').classList.toggle('active', m === 'suresiz');
 }
 
 function sinaviBaslat() {
-    if(cevapAnahtari.length < 10) return alert("Önce Editörden cevapları girin!");
-    aktifSorular = (tur === 'silahli') ? cevapAnahtari : cevapAnahtari.slice(0, 100);
+    if(tumVeri.length === 0) return alert("Sorular henüz hazır değil, lütfen bekleyin.");
+    aktifSorular = (tur === 'silahli') ? tumVeri : tumVeri.slice(0, 100);
     
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -36,24 +40,31 @@ function sinaviBaslat() {
 }
 
 function soruGoster() {
-    // Dinamik Resim Yükleme (1.jpg, 2.jpg...)
-    document.getElementById('q-img').src = (index + 1) + ".jpg";
+    const s = aktifSorular[index];
+    document.getElementById('q-text').innerText = (index + 1) + ". " + s.soru;
+    document.getElementById('btn-A').innerText = "A) " + s.a;
+    document.getElementById('btn-B').innerText = "B) " + s.b;
+    document.getElementById('btn-C').innerText = "C) " + s.c;
+    document.getElementById('btn-D').innerText = "D) " + s.d;
+    document.getElementById('btn-E').innerText = "E) " + s.e;
     document.getElementById('q-counter').innerText = `Soru: ${index + 1} / ${aktifSorular.length}`;
 }
 
 function cevapla(secim, btn) {
-    const dogrumu = (secim === aktifSorular[index]);
+    const dogruCevap = aktifSorular[index].cevap;
     const butonlar = document.querySelectorAll('.choice-btn');
-    document.getElementById('options-parent').style.pointerEvents = 'none';
+    document.getElementById('options-parent').style.pointerEvents = 'none'; // Çift tıklamayı engelle
 
-    if(dogrumu) {
+    if(secim === dogruCevap) {
         btn.classList.add('correct');
         dogruS++;
     } else {
         btn.classList.add('wrong');
-        butonlar.forEach(b => { if(b.innerText === aktifSorular[index]) b.classList.add('correct'); });
+        // Yanlış yapınca doğruyu göster
+        document.getElementById('btn-' + dogruCevap).classList.add('correct');
     }
 
+    // 1.2 SANİYE BEKLE VE GEÇ
     setTimeout(() => {
         butonlar.forEach(b => b.classList.remove('correct', 'wrong'));
         document.getElementById('options-parent').style.pointerEvents = 'auto';
@@ -64,17 +75,7 @@ function cevapla(secim, btn) {
 
 function sinavBitir() {
     clearInterval(timer);
-    alert(`Sınav Bitti! Doğru Sayınız: ${dogruS}`);
-    location.reload();
-}
-
-// Admin / Editör Fonksiyonları
-function adminGiris() { if(prompt("Şifre:") === "anfa2026") document.getElementById('admin-panel').style.display='flex'; }
-function closeAdmin() { document.getElementById('admin-panel').style.display='none'; }
-function kaydetAdmin() {
-    const vals = document.getElementById('cevap-anahtari-input').value.toUpperCase().replace(/\s/g, '');
-    localStorage.setItem('anfa_v5', JSON.stringify({cevaplar: vals.split('')}));
-    alert("Sınav Güncellendi!");
+    alert(`Sınav Bitti! Başarı Durumu: ${dogruS} Doğru / ${aktifSorular.length} Soru.`);
     location.reload();
 }
 
@@ -82,7 +83,7 @@ function baslatTimer() {
     timer = setInterval(() => {
         sure--;
         let m = Math.floor(sure/60), s = sure%60;
-        document.getElementById('timer').innerText = `${m}:${s<10?'0'+s:s}`;
+        document.getElementById('timer').innerHTML = `<i class="fas fa-clock"></i> ${m}:${s<10?'0'+s:s}`;
         if(sure<=0) sinavBitir();
     }, 1000);
 }
