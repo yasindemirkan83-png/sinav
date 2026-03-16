@@ -1,15 +1,17 @@
 let seciliTur = 'silahli', seciliMod = 'sureli', cevapAnahtari = [], ogrenciCevaplari = [], index = 0, dogruS = 0, sure = 165 * 60, timer;
 
-// Giriş Animasyonu ve Veri Kurtarma
+// 5 Saniye GIF Bekletme ve Veri Yükleme
 window.onload = () => {
     setTimeout(() => {
+        document.getElementById('splash').style.fadeOut = "slow"; // Görsel geçiş efekti
         document.getElementById('splash').style.display = 'none';
         document.getElementById('main-header').style.display = 'flex';
         document.getElementById('entry-screen').style.display = 'block';
-    }, 5000); // 5 Saniye GIF Süresi
+        document.body.style.overflow = 'auto'; // Kaydırmayı aç
+    }, 5000); // TAM 5 SANİYE
 
-    const savedKeys = localStorage.getItem('anfa_data');
-    if(savedKeys) cevapAnahtari = JSON.parse(savedKeys);
+    const data = localStorage.getItem('anfa_v3');
+    if(data) cevapAnahtari = JSON.parse(data);
 };
 
 function setTur(t) { 
@@ -25,10 +27,7 @@ function setMod(m) {
 }
 
 function sinaviBaslat() {
-    if(cevapAnahtari.length < 10) {
-        alert("Lütfen önce Admin Panelinden cevap anahtarını girin!");
-        return;
-    }
+    if(cevapAnahtari.length < 10) return alert("Admin panelinden cevapları girin (Şifre: anfa2026)");
     aktifSorular = seciliTur === 'silahli' ? cevapAnahtari : cevapAnahtari.slice(0, 100);
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -38,8 +37,6 @@ function sinaviBaslat() {
 function cevapla(secim, element) {
     const dogruCevap = aktifSorular[index];
     const butonlar = document.querySelectorAll('.opt-btn');
-    
-    // Tıklamayı geçici olarak engelle
     document.getElementById('options-container').style.pointerEvents = 'none';
 
     if(secim === dogruCevap) {
@@ -47,62 +44,38 @@ function cevapla(secim, element) {
         dogruS++;
     } else {
         element.classList.add('wrong');
-        // Doğru şıkkı da yak (Kullanıcı öğrensin)
         butonlar.forEach(btn => { if(btn.innerText === dogruCevap) btn.classList.add('correct'); });
     }
 
     ogrenciCevaplari.push({ s: index+1, m: secim, d: dogruCevap });
 
-    // 1.2 Saniye Bekleme ve Geçiş
+    // 1.2 SANİYE SONRA DİĞER SORUYA GEÇ
     setTimeout(() => {
         butonlar.forEach(btn => btn.classList.remove('correct', 'wrong'));
         document.getElementById('options-container').style.pointerEvents = 'auto';
         index++;
-        
-        if(index >= aktifSorular.length) {
-            sinavBitir();
-        } else {
-            document.getElementById('q-counter').innerText = "Soru: " + (index + 1);
-        }
-    }, 1200); 
+        if(index >= aktifSorular.length) sinavBitir();
+        else document.getElementById('q-counter').innerText = "Soru: " + (index + 1);
+    }, 1200);
 }
 
 function sinavBitir() {
     clearInterval(timer);
-    let sonuc = `ANFA ÖGG SINAV SONUCU\n----------------------\nToplam Soru: ${aktifSorular.length}\nDoğru: ${dogruS}\nYanlış: ${aktifSorular.length - dogruS}\n\n`;
-    ogrenciCevaplari.forEach(item => {
-        sonuc += `Soru ${item.s}: ${item.m === item.d ? '✅' : '❌'} (Sen: ${item.m}, Doğru: ${item.d})\n`;
-    });
-
-    const blob = new Blob([sonuc], {type: 'text/plain'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "ANFA_Rapor.txt";
-    a.click();
-
-    alert("Sınav tamamlandı. Başarı raporun indirildi!");
+    alert(`Sınav Bitti! Doğru: ${dogruS}`);
     location.reload();
 }
 
-// PDF AÇMA FONKSİYONU (GARANTİLİ)
 function pencereAc() {
-    const pdfUrl = 'sorular.pdf';
-    const win = window.open(pdfUrl, '_blank');
-    if (!win) { // Eğer tarayıcı engellerse direkt sayfada aç
-        window.location.href = pdfUrl;
-    }
+    window.open('sorular.pdf', '_blank'); // Klasör yolu kaldırıldı
 }
 
 function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-function adminGiris() { if(prompt("Yönetici Şifresi:") === "anfa2026") document.getElementById('admin-modal').style.display='flex'; }
+function adminGiris() { if(prompt("Şifre:") === "anfa2026") document.getElementById('admin-modal').style.display='flex'; }
 function closeAdmin() { document.getElementById('admin-modal').style.display='none'; }
 function kaydetAdmin() {
-    const raw = document.getElementById('cevap-input').value.toUpperCase().replace(/\s/g, '');
-    if(raw.length < 10) return alert("Geçersiz giriş!");
-    cevapAnahtari = raw.split('');
-    localStorage.setItem('anfa_data', JSON.stringify(cevapAnahtari));
-    alert("Cevap anahtarı başarıyla güncellendi!");
+    const val = document.getElementById('cevap-input').value.toUpperCase().replace(/\s/g, '');
+    localStorage.setItem('anfa_v3', JSON.stringify(val.split('')));
+    alert("Kaydedildi!");
     location.reload();
 }
 
