@@ -1,12 +1,414 @@
 [
   {
-    "soru": "Özel güvenlik görevlileri silahlarını hangi durumda kullanabilir?",
-    "a": "Korkutmak amacıyla",
-    "b": "Meşru müdafaa durumunda",
-    "c": "Kalabalığı dağıtmak için",
-    "d": "Emir verildiğinde her zaman",
-    "e": "Havaya ateş etmek için",
+    "soru": "Özel Güvenlik Görevlileri hangi kanuna tabidir?",
+    "a": "1475", "b": "4857", "c": "5188", "d": "657", "e": "5237",
+    "cevap": "C"
+  },
+  {
+    "soru": "Görev alanında bir suçla karşılaşan ÖGG'nin hangisini yapma yetkisi yoktur?",
+    "a": "Olay yerini koruma", "b": "Delilleri muhafaza", "c": "Şüpheliyi sorgulama", "d": "Kolluğa haber verme", "e": "Yakalama",
+    "cevap": "C"
+  },
+  {
+    "soru": "X-Ray cihazında patlayıcılar genellikle hangi renk tonda görülür?",
+    "a": "Mavi", "b": "Yeşil", "c": "Turuncu/Kahverengi", "d": "Siyah", "e": "Mor",
+    "cevap": "C"
+  },
+  {
+    "soru": "Şüpheli bir pakete yaklaşma sınırı en az kaç metre olmalıdır?",
+    "a": "10", "b": "50", "c": "100", "d": "200", "e": "500",
+    "cevap": "C"
+  },
+  {
+    "soru": "El detektörü ile arama yaparken mesafe ne kadar olmalıdır?",
+    "a": "1-2 cm", "b": "2.5-7.5 cm", "c": "10-15 cm", "d": "20-30 cm", "e": "Temas etmeli",
     "cevap": "B"
-  }
-]
-
+  },
+  {
+    "soru": "Yangın söndürme cihazlarının (Kuru Kimyevi Toz) bakımı kaç ayda bir yapılır?",
+    "a": "1", "b": "3", "c": "6", "d": "12", "e": "24",
+    "cevap": "C"
+  },
+  {
+    "soru": "B kapısı metal detektöründen geçen birinde alarm çalarsa ne yapılır?",
+    "a": "Hemen gözaltına alınır", "b": "Üzerindeki metalleri çıkarması istenir ve tekrar geçirilir", "c": "Şahıs kovulur", "d": "Polis çağrılır", "e": "Alarm görmezden gelinir",
+    "cevap": "B"
+  },
+  {
+    "soru": "Copun vücutta vurulmaması gereken (yasaklı) bölgesi neresidir?",
+    "a": "Kol", "b": "Bacak", "c": "Kalça", "d": "Kafa", "e": "Omuz",
+    "cevap": "D"
+  },
+  {
+    "soru": "Toplumsal olaylarda saldırgan bir grubu bölmek için kullanılan düzen hangisidir?",
+    "a": "Hat", "b": "Çember", "c": "Kama", "d": "Kol", "e": "Geri çekilme",
+    "cevap": "C"
+  },
+  {
+    "soru": "Kişi korumada 'Öncü İstihbarat' çalışması ne zaman yapılır?",
+    "a": "Görevden sonra", "b": "Görev sırasında", "c": "Görev başlamadan önce", "d": "Yolda", "e": "Sadece saldırı anında",
+    "cevap": "C"
+  },
+  {
+    "soru": "Tutanaklarda en az kaç imza bulunmalıdır?",
+    "a": "1", "b": "2", "c": "3", "d": "4", "e": "5",
+    "cevap": "B"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi çevre güvenlik sistemidir?",
+    "a": "Turnike", "b": "Kart okuyucu", "c": "Çit ve tel örgüler", "d": "Metal detektörü", "e": "Parmak izi okuyucu",
+    "cevap": "C"
+  },
+  {
+    "soru": "Olay yerinde delillere çıplak elle dokunulursa ne olur?",
+    "a": "Delil daha iyi korunur", "b": "Parmak izi karışır/bozulur", "c": "Hiçbir şey olmaz", "d": "Polis sevinir", "e": "Delil parlar",
+    "cevap": "B"
+  },
+  {
+    "soru": "İlk yardımın temel uygulamaları (KBK) sıralaması nedir?",
+    "a": "Koruma-Bildirme-Kurtarma", "b": "Bak-Dinle-Hisset", "c": "Bas-Bağla-Bırak", "d": "Durdur-Düzelt-Dinlendir", "e": "Ara-Sor-Söyle",
+    "cevap": "A"
+  },
+  {
+    "soru": "Bilinci kapalı, solunumu olan hastaya hangi pozisyon verilir?",
+    "a": "Sırtüstü", "b": "Yüzüstü", "c": "Şok pozisyonu", "d": "Koma (Yan yatış) pozisyonu", "e": "Yarı oturur",
+    "cevap": "D"
+  },
+  {
+    "soru": "Yetişkin bir kişide dakikadaki normal nabız sayısı kaçtır?",
+    "a": "40-60", "b": "60-100", "c": "100-120", "d": "120-140", "e": "150+",
+    "cevap": "B"
+  },
+  {
+    "soru": "Göze toz kaçmasında ilk yardım ne olmalıdır?",
+    "a": "Göz ovulur", "b": "Pamukla silinir", "c": "Bol suyla yıkanır", "d": "İlaç damlatılır", "e": "Üflenir",
+    "cevap": "C"
+  },
+  {
+    "soru": "Akaryakıt yangınları hangi sınıfa girer?",
+    "a": "A sınıfı", "b": "B sınıfı", "c": "C sınıfı", "d": "D sınıfı", "e": "E sınıfı",
+    "cevap": "B"
+  },
+  {
+    "soru": "Yanıcı madde, ısı ve oksijenin birleşmesiyle oluşan kimyasal reaksiyona ne denir?",
+    "a": "Yangın", "b": "Yanma", "c": "Patlama", "d": "Duman", "e": "Isı transferi",
+    "cevap": "B"
+  },
+  {
+    "soru": "Doğalgaz sızıntısında ilk yapılması gereken nedir?",
+    "a": "Işıkları yakmak", "b": "Camları kapatmak", "c": "Gaz vanasını kapatmak", "d": "Telefonla içeriden yardım çağırmak", "e": "Kibrit çakmak",
+    "cevap": "C"
+  },
+  {
+    "soru": "Belirli bir bölgede devriye görevlisinin düzenli aralıklarla geçtiği, kontrol ettiği noktalara ne denir?",
+    "a": "Kontrol noktası", "b": "Durak noktası", "c": "Devriye güzergahı", "d": "Hassas nokta", "e": "Gözetleme kulesi",
+    "cevap": "C"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi devriyenin temel görevlerinden biri değildir?",
+    "a": "Caydırıcılık sağlamak", "b": "Suçluları yargılamak", "c": "Düzeni korumak", "d": "Yardıma muhtaç olanlara yardım etmek", "e": "Güvenliği tehdit eden unsurları denetlemek",
+    "cevap": "B"
+  },
+  {
+    "soru": "Özel güvenlik görevlileri, görev alanları içinde kimlik sorma yetkisini hangi kanuna göre kullanır?",
+    "a": "4857 Sayılı Kanun", "b": "2559 Sayılı PVSK", "c": "5188 Sayılı Kanun", "d": "657 Sayılı Kanun", "e": "5237 Sayılı TCK",
+    "cevap": "C"
+  },
+  {
+    "soru": "Nokta görevi yapan bir personelin, görev bölgesinden en fazla ne kadar ayrılma yetkisi vardır?",
+    "a": "10 metre", "b": "20 metre", "c": "İhtiyaç molası kadar", "d": "Acil durumlar hariç asla ayrılamaz", "e": "Kantine gidecek kadar",
+    "cevap": "D"
+  },
+  {
+    "soru": "Devriye görevi sırasında karşılaşılan 'şüpheli paket' durumunda aşağıdakilerden hangisi yanlıştır?",
+    "a": "Çevre emniyeti alınır", "b": "Paketin etrafı boşaltılır", "c": "Paket sarsılarak içinde ne olduğu kontrol edilir", "d": "Genel kolluğa haber verilir", "e": "İnsanlar bölgeden uzaklaştırılır",
+    "cevap": "C"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi bir devriye yöntemi değildir?",
+    "a": "Olağan (Rutin) devriye", "b": "Planlı devriye", "c": "Dairesel devriye", "d": "Gizli devriye", "e": "Geri dönüşlü devriye",
+    "cevap": "D"
+  },
+  {
+    "soru": "El dedektörü ile yapılan aramada, cihazın kişiye mesafesi ne kadar olmalıdır?",
+    "a": "Temas etmelidir", "b": "2,5 - 7,5 cm", "c": "15 - 20 cm", "d": "50 cm", "e": "Mesafe önemli değildir",
+    "cevap": "B"
+  },
+  {
+    "soru": "Zor kullanma şartları oluştuğunda, kullanılacak kuvvetin derecesi neye göre belirlenir?",
+    "a": "Görevlinin keyfine göre", "b": "Saldırganın fiziksel gücüne göre", "c": "Direniş ve saldırının mahiyetine ve derecesine göre", "d": "Olayın meydana geldiği yere göre", "e": "Saate göre",
+    "cevap": "C"
+  },
+  {
+    "soru": "Tutanakların bölümleri hangi seçenekte doğru sıralanmıştır?",
+    "a": "Başlık - Metin - İmza", "b": "Başlık - Giriş - Metin - Sonuç - İmza", "c": "Giriş - Olay - Sonuç", "d": "Başlık - Tarih - İmza", "e": "Metin ve İmza",
+    "cevap": "B"
+  },
+  {
+    "soru": "Toplumsal olaylarda müdahale eden grubun kullandığı 'Kama' düzeninin amacı nedir?",
+    "a": "Grubun hepsini yakalamak", "b": "Topluluğu bölmek veya yanlara doğru itmek", "c": "Toplulukla diyalog kurmak", "d": "Topluluğun etrafını sarmak", "e": "Grubu korumak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi bir 'Nokta' görevlisinin dikkat etmesi gereken hususlardan biridir?",
+    "a": "Görev sırasında gazete okumak", "b": "Görev alanına giren herkesi tanımak", "c": "Görev yerinde uyumak", "d": "Nokta içerisine sivil arkadaş kabul etmek", "e": "Görev yerine yabancıların girmesine engel olmak",
+    "cevap": "E"
+  },
+  {
+    "soru": "Araç kontrol noktasında, aracın aranması sırasında aşağıdakilerden hangisi yapılmaz?",
+    "a": "Aracın altı kontrol aynasıyla kontrol edilir", "b": "Sürücüden bagajı açması istenir", "c": "Torpido ve koltuk altlarına bakılır", "d": "Aracın yakıt deposu boşaltılır", "e": "Şüpheli durumlarda kolluğa bilgi verilir",
+    "cevap": "D"
+  },
+  {
+    "soru": "Copla vuruşlarda vücudun hangi bölgesi 'ikinci derece' vuruş bölgesidir?",
+    "a": "Kafa ve boyun", "b": "Bel ve omurga", "c": "Kol ve bacak kasları", "d": "El ve ayak bilekleri", "e": "Gözler",
+    "cevap": "C"
+  },
+  {
+    "soru": "Devriye personelinin teçhizatında aşağıdakilerden hangisinin bulunması zorunlu değildir?",
+    "a": "Telsiz", "b": "Cop", "c": "Kelepçe", "d": "El feneri", "e": "Dizüstü bilgisayar",
+    "cevap": "E"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi 'Adli Arama' kapsamına girer?",
+    "a": "Havaalanı girişinde yapılan arama", "b": "Stadyum girişinde yapılan arama", "c": "Suç işlendikten sonra delil toplamak amacıyla yapılan arama", "d": "Alışveriş merkezi girişinde yapılan arama", "e": "Kamu binasına girişte yapılan arama",
+    "cevap": "C"
+  },
+  {
+    "soru": "Korunan kişinin (VIP) geçtiği güzergah üzerindeki yüksek binaların kontrol edilmesine ne denir?",
+    "a": "Yakın koruma", "b": "Boğum noktası", "c": "Güzergah emniyeti", "d": "Alan koruması", "e": "İstihbarat",
+    "cevap": "C"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi 'Kelepçe' takılması gereken durumlardan biri değildir?",
+    "a": "Yakalanan şahsın kaçma ihtimali varsa", "b": "Şahıs kendisine veya başkasına zarar verecekse", "c": "Şahıs çok yaşlı veya çocuksa", "d": "Şahsın saldırgan tavırları varsa", "e": "Kolluğa teslim edilene kadar güvenlik riski varsa",
+    "cevap": "C"
+  },
+  {
+    "soru": "Rapor yazarken aşağıdakilerden hangisine dikkat edilmez?",
+    "a": "Sade ve anlaşılır bir dil kullanılmalı", "b": "Tarih ve saat belirtilmeli", "c": "Sadece gerçeklere dayanmalı", "d": "Kişisel yorumlar ve duygular eklenmeli", "e": "İmzalanmalı",
+    "cevap": "D"
+  },
+  {
+    "soru": "Bir insanın tanınmasını sağlayan, diğer insanlardan ayıran özelliklerin bütününe ne denir?",
+    "a": "Kimlik", "b": "Şema", "c": "Eşkâl", "d": "Portre", "e": "İpucu",
+    "cevap": "C"
+  },
+  {
+    "soru": "Özel güvenlik görevlisi, görev alanındaki yangın olayında hangisini yapmakla yükümlü değildir?",
+    "a": "İtfaiyeye haber vermek", "b": "Çevredeki insanları tahliye etmek", "c": "Yangın tüpüyle ilk müdahaleyi yapmak", "d": "Yangının çıkış nedenini resmi olarak soruşturmak", "e": "Giriş-çıkışları kontrol altına almak",
+    "cevap": "D"
+  },
+  {
+    "soru": "İletişimde kişinin kendisini karşısındakinin yerine koyarak onun duygularını anlamasına ne denir?",
+    "a": "Sempati", "b": "Empati", "c": "Antipati", "d": "Telepati", "e": "İroni",
+    "cevap": "B"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi iletişimi engelleyen faktörlerden biridir?",
+    "a": "Geri bildirim", "b": "Etkin dinleme", "c": "Ön yargılar", "d": "Göz teması", "e": "Açık uçlu sorular",
+    "cevap": "C"
+  },
+  {
+    "soru": "Kişiler arası iletişimde 'mesajın' gönderildiği kişiye ne ad verilir?",
+    "a": "Kaynak", "b": "Kanal", "c": "Alıcı", "d": "Kod", "e": "Gürültü",
+    "cevap": "C"
+  },
+  {
+    "soru": "'Göz teması kurmak, gülümsemek ve dik durmak' hangi iletişim türüne girer?",
+    "a": "Sözlü İletişim", "b": "Yazılı İletişim", "c": "Sözsüz İletişim (Beden Dili)", "d": "Elektronik İletişim", "e": "Sanal İletişim",
+    "cevap": "C"
+  },
+  {
+    "soru": "ÖGG'nin öfke kontrolünde yapması gereken ilk adım nedir?",
+    "a": "Karşı tarafa bağırmak", "b": "Sakinleşmek ve derin nefes almak", "c": "Olay yerinden kaçmak", "d": "Silah kullanmak", "e": "Karşı tarafı suçlamak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi etkin dinlemenin şartlarından biridir?",
+    "a": "Sürekli söz kesmek", "b": "Başka işle meşgul olmak", "c": "Konuşmacının yüzüne bakmak", "d": "Tavana bakmak", "e": "Saate bakmak",
+    "cevap": "C"
+  },
+  {
+    "soru": "'Sen dili' yerine 'Ben dili' kullanmanın temel amacı nedir?",
+    "a": "Karşı tarafı suçlamak", "b": "Savunmacı duyguları azaltmak", "c": "Üstünlük kurmak", "d": "Tartışmayı uzatmak", "e": "Karşı tarafı susturmak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Toplumsal bir olayda ÖGG'nin insanlarla iletişim kurarken kullandığı mesafeye ne denir?",
+    "a": "Mahrem Alan", "b": "Kişisel Alan", "c": "Sosyal Alan", "d": "Ortak Alan", "e": "Kamusal Alan",
+    "cevap": "E"
+  },
+  {
+    "soru": "İletişimde kanal nedir?",
+    "a": "Mesajın içeriğidir", "b": "Mesajı gönderen kişidir", "c": "Mesajın iletildiği yoldur", "d": "Mesajın ulaştığı sonuçtur", "e": "Gürültüdür",
+    "cevap": "C"
+  },
+  {
+    "soru": "'Hayır' diyebilmek ancak bunu yaparken karşı tarafı kırmadan sınırları çizmek hangi davranış türüdür?",
+    "a": "Saldırgan", "b": "Çekingen", "c": "Atılgan (Güvenli)", "d": "Manipülatif", "e": "Pasif",
+    "cevap": "C"
+  },
+  {
+    "soru": "Toplumsal olaylarda saldırgan grubu bölmek ve yönlendirmek için kullanılan en etkili düzen hangisidir?",
+    "a": "Hat Düzeni", "b": "Çember Düzeni", "c": "Kama Düzeni", "d": "Derin Kol Düzeni", "e": "Geri Çekilme Düzeni",
+    "cevap": "C"
+  },
+  {
+    "soru": "Göz yaşartıcı gazların etkisi altında kalan bir kişiye aşağıdakilerden hangisi yapılmaz?",
+    "a": "Temiz havaya çıkarılır", "b": "Yüzü rüzgara karşı tutulur", "c": "Gözler bol suyla yıkanır", "d": "Gözler ovuşturulur", "e": "Üzerindeki kirli giysiler çıkarılır",
+    "cevap": "D"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi bir topluluğu 'kalabalık' yapan özelliklerden biridir?",
+    "a": "Ortak bir liderlerinin olması", "b": "Ortak bir amaç için geçici olarak bir araya gelmeleri", "c": "Herkesin birbirini tanıması", "d": "Hiyerarşik bir yapının olması", "e": "Siyasi bir parti üyesi olmaları",
+    "cevap": "B"
+  },
+  {
+    "soru": "Grubun içine sızarak grubu kışkırtan ve yasa dışı eylemlere yönelten kişilere ne denir?",
+    "a": "Lider", "b": "Sözcü", "c": "Provokatör", "d": "Seyirci", "e": "Destekçi",
+    "cevap": "C"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi panik durumundaki bir kalabalığın özelliğidir?",
+    "a": "Mantıklı hareket etme", "b": "Yardımlaşma", "c": "Kaçma ve kontrolsüz hareket etme", "d": "Lideri dinleme", "e": "Sessiz bekleme",
+    "cevap": "C"
+  },
+  {
+    "soru": "Göz yaşartıcı gazların insanlar üzerindeki fizyolojik etkisi nedir?",
+    "a": "İşitme kaybı", "b": "Geçici körlük ve yanma hissi", "c": "Felç", "d": "Hafıza kaybı", "e": "Deride kalıcı lekeler",
+    "cevap": "B"
+  },
+  {
+    "soru": "Jop (Cop) kullanırken dikkat edilmesi gereken en önemli kural nedir?",
+    "a": "Kafa bölgesine vurmak", "b": "Hızlıca vurup kaçmak", "c": "Sadece savunma ve caydırma amaçlı orantılı kullanmak", "d": "Havaya fırlatmak", "e": "Cebinde taşımak",
+    "cevap": "C"
+  },
+  {
+    "soru": "Bir toplulukta 'heyecanlılık' arttıkça aşağıdakilerden hangisi azalır?",
+    "a": "Saldırganlık", "b": "Ses seviyesi", "c": "Sağduyu ve mantıklı düşünme", "d": "Hareketlilik", "e": "Kalabalığın sayısı",
+    "cevap": "C"
+  },
+  {
+    "soru": "Toplumsal olaylara müdahale sırasında ÖGG'nin kalkan kullanmasının temel amacı nedir?",
+    "a": "Grubu dövmek", "b": "Atılan cisimlerden korunmak", "c": "Yorgunluğu gidermek", "d": "Hava atmak", "e": "Saklanmak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Yasa dışı bir topluluğu dağıtmak için yapılan anonsun amacı nedir?",
+    "a": "Korkutmak", "b": "Dağılmaları için yasal uyarı yapmak", "c": "Şarkı söylemek", "d": "Polisi beklemek", "e": "Zaman kazanmak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Yakın koruma hizmetlerinde en kritik an hangisidir?",
+    "a": "Ofiste otururken", "b": "Araçtan iniş ve biniş anları", "c": "Yemek yerken", "d": "Uyurken", "e": "Toplantı sırasında",
+    "cevap": "B"
+  },
+  {
+    "soru": "Koruma çemberinde 'İç Halka'nın görevi nedir?",
+    "a": "Çevredeki trafiği yönetmek", "b": "VIP'ye en yakın olup bedensel koruma sağlamak", "c": "Uzaktaki şüphelileri izlemek", "d": "Basınla konuşmak", "e": "Yemekleri kontrol etmek",
+    "cevap": "B"
+  },
+  {
+    "soru": "Koruma personelinin silahı nerede olmalıdır?",
+    "a": "Çantada", "b": "Elinde sürekli hazır", "c": "Kılıfında ve her an çekilebilecek durumda", "d": "Arabanın bagajında", "e": "VIP'nin belinde",
+    "cevap": "C"
+  },
+  {
+    "soru": "VIP (Korunan Kişi) yürürken koruma personeli nerede durmalıdır?",
+    "a": "10 metre arkasında", "b": "Yanında veya bir adım arkasında uygun sektörde", "c": "Karşı kaldırımda", "d": "VIP'nin önünde koşarak", "e": "Arabanın içinde",
+    "cevap": "B"
+  },
+  {
+    "soru": "Aşağıdakilerden hangisi suikastların nedenlerinden biri olabilir?",
+    "a": "Siyasi görüş ayrılığı", "b": "İdeolojik nedenler", "c": "Kişisel intikam", "d": "İnanç farklılıkları", "e": "Hepsi",
+    "cevap": "E"
+  },
+  {
+    "soru": "Koruma aracında bulunması gereken en önemli cihaz hangisidir?",
+    "a": "Televizyon", "b": "Buzdolabı", "c": "Telsiz ve haberleşme cihazları", "d": "Oyun konsolu", "e": "Kahve makinesi",
+    "cevap": "C"
+  },
+  {
+    "soru": "Boğum noktası nedir?",
+    "a": "Yemek yenilen yer", "b": "Saldırıya en müsait olan, geçilmesi zorunlu dar alanlar", "c": "VIP'nin yatak odası", "d": "Bahçe kapısı", "e": "Güvenli bölge",
+    "cevap": "B"
+  },
+  {
+    "soru": "Öncü istihbarat ekibinin görevi nedir?",
+    "a": "Saldırı anında ateş etmek", "b": "VIP'nin gideceği güzergahı önceden kontrol edip güvenli hale getirmek", "c": "VIP'nin çantasını taşımak", "d": "Fotoğraf çekmek", "e": "Araba kullanmak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Koruma planı hazırlanırken aşağıdakilerden hangisi göz önünde bulundurulmaz?",
+    "a": "Tehdit seviyesi", "b": "VIP'nin yaşam tarzı", "c": "Hava durumu", "d": "VIP'nin tuttuğu takım", "e": "Güzergah özellikleri",
+    "cevap": "D"
+  },
+  {
+    "soru": "Bir saldırı anında yakın korumanın ilk önceliği nedir?",
+    "a": "Saldırganı yakalamak", "b": "VIP'yi olay yerinden hızlıca uzaklaştırmak ve güvenliğe almak", "c": "Ateş etmek", "d": "Polisi aramak", "e": "Bağırmak",
+    "cevap": "B"
+  },
+  {
+    "soru": "Yanma olayının gerçekleşmesi için hangisinin birleşmesi gerekir?",
+    "a": "Su-Hava-Isı", "b": "Yanıcı Madde-Isı-Oksijen (Yangın Üçgeni)", "c": "Duman-Gaz-Su", "d": "Toprak-Hava-Işık", "e": "Kağıt-Plastik-Cam",
+    "cevap": "B"
+  },
+  {
+    "soru": "Akaryakıt yangınlarında (B Sınıfı) asla ne kullanılmaz?",
+    "a": "Köpük", "b": "Toz", "c": "Su", "d": "Karbondioksit", "e": "Kum",
+    "cevap": "C"
+  },
+  {
+    "soru": "Doğalgaz sızıntısı olan bir ortamda ilk önce ne yapılmalıdır?",
+    "a": "Elektrik düğmesine basılmalıdır", "b": "Camlar açılmalı ve ana vana kapatılmalıdır", "c": "Kibrit çakılmalıdır", "d": "İtfaiye içeriden aranmalıdır", "e": "Koşarak uzaklaşılmalıdır",
+    "cevap": "B"
+  },
+  {
+    "soru": "Yangın söndürme cihazı kullanılırken rüzgar hangi yöne alınmalıdır?",
+    "a": "Karşıya", "b": "Arkaya (Rüzgarı arkana al)", "c": "Sağ tarafa", "d": "Sol tarafa", "e": "Fark etmez",
+    "cevap": "B"
+  },
+  {
+    "soru": "'LPG' ve 'Metan' gibi gaz yangınları hangi sınıfa girer?",
+    "a": "A Sınıfı", "b": "B Sınıfı", "c": "C Sınıfı", "d": "D Sınıfı", "e": "F Sınıfı",
+    "cevap": "C"
+  },
+  {
+    "soru": "Bir yangında binayı tahliye ederken hangisi kullanılmamalıdır?",
+    "a": "Yangın merdiveni", "b": "Normal merdiven", "c": "Asansör", "d": "Dış kapı", "e": "Pencere",
+    "cevap": "C"
+  },
+  {
+    "soru": "Orman yangınlarında en çok kullanılan söndürme maddesi nedir?",
+    "a": "Köpük", "b": "Su", "c": "Toprak", "d": "Kimyasal toz", "e": "Karbondioksit",
+    "cevap": "B"
+  },
+  {
+    "soru": "Deprem anında bina içerisindeyseniz yapılması gereken en doğru hareket hangisidir?",
+    "a": "Balkona çıkmak", "b": "Merdivenlere koşmak", "c": "Çök-Kapan-Tutun yöntemini uygulamak", "d": "Pencereden atlamak", "e": "Asansöre binmek",
+    "cevap": "C"
+  },
+  {
+    "soru": "Yangın yerindeki tehlikelerden olan 'LPG tüpü patlaması' ne tür bir tehlikedir?",
+    "a": "Kimyasal", "b": "Fiziksel", "c": "Biyolojik", "d": "Psikolojik", "e": "Nükleer",
+    "cevap": "B"
+  },
+  {
+    "soru": "İtfaiye teşkilatının telefon numarası kaçtır?",
+    "a": "110 (veya güncel 112)", "b": "155", "c": "156", "d": "177", "e": "184",
+    "cevap": "A"
+  },
+  {
+    "soru": "İlk yardımda temel yaşam desteği sağlarken göğüs basısı/suni solunum oranı nedir?",
+    "a": "15/2", "b": "30/2", "c": "5/1", "d": "10/2", "e": "20/5",
+    "cevap": "B"
+  },
+  {
+    "soru": "Hava yolu tam tıkanmış (konuşamayan, moraran) bir kişiye hangi manevra uygulanır?",
+    "a": "Rentek Manevrası", "b": "Heimlich Manevrası", "c": "Şok Pozisyonu", "d": "Koma Pozisyonu", "e": "Kalp Masajı",
+    "cevap": "B"
+  },
+  {
+    "soru": "İlk yardımda 'Bak-Dinle-Hisset' yöntemi ile ne kontrol edilir?",
+    "a": "Kanama", "b": "Kırık", "c": "Sol
