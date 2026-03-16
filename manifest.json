@@ -1,11 +1,17 @@
 {
   "name": "ANFA ÖGG AKADEMİ",
   "short_name": "ANFA",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0e14",
   "theme_color": "#00d2ff",
+  "scope": "./",
   "icons": [
-    { "src": "anfa.gif", "sizes": "512x512", "type": "image/gif" }
+    {
+      "src": "anfa.gif",
+      "sizes": "512x512",
+      "type": "image/gif",
+      "purpose": "any maskable"
+    }
   ]
 }
