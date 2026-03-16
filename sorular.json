@@ -162,7 +162,7 @@
   {
     "soru": "Copla vuruşlarda vücudun hangi bölgesi 'ikinci derece' vuruş bölgesidir?",
     "a": "Kafa ve boyun", "b": "Bel ve omurga", "c": "Kol ve bacak kasları", "d": "El ve ayak bilekleri", "e": "Gözler",
-    "cevap": "C"
+    "cevap": "D"
   },
   {
     "soru": "Devriye personelinin teçhizatında aşağıdakilerden hangisinin bulunması zorunlu değildir?",
@@ -200,7 +200,7 @@
     "cevap": "D"
   },
   {
-    "soru": "İletişimde kişinin kendisini karşısındakinin yerine koyarak onun duygularını anlamasına ne denir?",
+    "soru": "İletişimde kişinin kendisini karşısındakinin yerine koyarak duygularını anlamasına ne denir?",
     "a": "Sempati", "b": "Empati", "c": "Antipati", "d": "Telepati", "e": "İroni",
     "cevap": "B"
   },
@@ -235,7 +235,7 @@
     "cevap": "B"
   },
   {
-    "soru": "Toplumsal bir olayda ÖGG'nin insanlarla iletişim kurarken kullandığı mesafeye ne denir?",
+    "soru": "Toplumsal bir olayda ÖGG'nin insanlarla kullandığı mesafeye ne denir?",
     "a": "Mahrem Alan", "b": "Kişisel Alan", "c": "Sosyal Alan", "d": "Ortak Alan", "e": "Kamusal Alan",
     "cevap": "E"
   },
@@ -245,17 +245,17 @@
     "cevap": "C"
   },
   {
-    "soru": "'Hayır' diyebilmek ancak bunu yaparken karşı tarafı kırmadan sınırları çizmek hangi davranış türüdür?",
+    "soru": "'Hayır' diyebilmek ancak karşı tarafı kırmadan sınırları çizmek hangi davranıştır?",
     "a": "Saldırgan", "b": "Çekingen", "c": "Atılgan (Güvenli)", "d": "Manipülatif", "e": "Pasif",
     "cevap": "C"
   },
   {
-    "soru": "Toplumsal olaylarda saldırgan grubu bölmek ve yönlendirmek için kullanılan en etkili düzen hangisidir?",
+    "soru": "Toplumsal olaylarda grubu bölmek ve yönlendirmek için kullanılan düzen hangisidir?",
     "a": "Hat Düzeni", "b": "Çember Düzeni", "c": "Kama Düzeni", "d": "Derin Kol Düzeni", "e": "Geri Çekilme Düzeni",
     "cevap": "C"
   },
   {
-    "soru": "Göz yaşartıcı gazların etkisi altında kalan bir kişiye aşağıdakilerden hangisi yapılmaz?",
+    "soru": "Göz yaşartıcı gazların etkisi altında kalan bir kişiye hangisi yapılmaz?",
     "a": "Temiz havaya çıkarılır", "b": "Yüzü rüzgara karşı tutulur", "c": "Gözler bol suyla yıkanır", "d": "Gözler ovuşturulur", "e": "Üzerindeki kirli giysiler çıkarılır",
     "cevap": "D"
   },
@@ -265,7 +265,7 @@
     "cevap": "B"
   },
   {
-    "soru": "Grubun içine sızarak grubu kışkırtan ve yasa dışı eylemlere yönelten kişilere ne denir?",
+    "soru": "Grubun içine sızarak grubu kışkırtan kişilere ne denir?",
     "a": "Lider", "b": "Sözcü", "c": "Provokatör", "d": "Seyirci", "e": "Destekçi",
     "cevap": "C"
   },
@@ -281,7 +281,7 @@
   },
   {
     "soru": "Jop (Cop) kullanırken dikkat edilmesi gereken en önemli kural nedir?",
-    "a": "Kafa bölgesine vurmak", "b": "Hızlıca vurup kaçmak", "c": "Sadece savunma ve caydırma amaçlı orantılı kullanmak", "d": "Havaya fırlatmak", "e": "Cebinde taşımak",
+    "a": "Kafa bölgesine vurmak", "b": "Hızlıca vurup kaçmak", "c": "Sadece savunma amaçlı orantılı kullanmak", "d": "Havaya fırlatmak", "e": "Cebinde taşımak",
     "cevap": "C"
   },
   {
@@ -290,7 +290,7 @@
     "cevap": "C"
   },
   {
-    "soru": "Toplumsal olaylara müdahale sırasında ÖGG'nin kalkan kullanmasının temel amacı nedir?",
+    "soru": "Toplumsal olaylarda ÖGG'nin kalkan kullanmasının temel amacı nedir?",
     "a": "Grubu dövmek", "b": "Atılan cisimlerden korunmak", "c": "Yorgunluğu gidermek", "d": "Hava atmak", "e": "Saklanmak",
     "cevap": "B"
   },
@@ -336,22 +336,22 @@
   },
   {
     "soru": "Öncü istihbarat ekibinin görevi nedir?",
-    "a": "Saldırı anında ateş etmek", "b": "VIP'nin gideceği güzergahı önceden kontrol edip güvenli hale getirmek", "c": "VIP'nin çantasını taşımak", "d": "Fotoğraf çekmek", "e": "Araba kullanmak",
+    "a": "Saldırı anında ateş etmek", "b": "VIP'nin güzergahını önceden kontrol edip güvenli hale getirmek", "c": "VIP'nin çantasını taşımak", "d": "Fotoğraf çekmek", "e": "Araba kullanmak",
     "cevap": "B"
   },
   {
-    "soru": "Koruma planı hazırlanırken aşağıdakilerden hangisi göz önünde bulundurulmaz?",
+    "soru": "Koruma planı hazırlanırken hangisi göz önünde bulundurulmaz?",
     "a": "Tehdit seviyesi", "b": "VIP'nin yaşam tarzı", "c": "Hava durumu", "d": "VIP'nin tuttuğu takım", "e": "Güzergah özellikleri",
     "cevap": "D"
   },
   {
     "soru": "Bir saldırı anında yakın korumanın ilk önceliği nedir?",
-    "a": "Saldırganı yakalamak", "b": "VIP'yi olay yerinden hızlıca uzaklaştırmak ve güvenliğe almak", "c": "Ateş etmek", "d": "Polisi aramak", "e": "Bağırmak",
+    "a": "Saldırganı yakalamak", "b": "VIP'yi olay yerinden uzaklaştırmak ve güvenliğe almak", "c": "Ateş etmek", "d": "Polisi aramak", "e": "Bağırmak",
     "cevap": "B"
   },
   {
     "soru": "Yanma olayının gerçekleşmesi için hangisinin birleşmesi gerekir?",
-    "a": "Su-Hava-Isı", "b": "Yanıcı Madde-Isı-Oksijen (Yangın Üçgeni)", "c": "Duman-Gaz-Su", "d": "Toprak-Hava-Işık", "e": "Kağıt-Plastik-Cam",
+    "a": "Su-Hava-Isı", "b": "Yanıcı Madde-Isı-Oksijen", "c": "Duman-Gaz-Su", "d": "Toprak-Hava-Işık", "e": "Kağıt-Plastik-Cam",
     "cevap": "B"
   },
   {
@@ -370,7 +370,7 @@
     "cevap": "B"
   },
   {
-    "soru": "'LPG' ve 'Metan' gibi gaz yangınları hangi sınıfa girer?",
+    "soru": "LPG ve Metan gibi gaz yangınları hangi sınıfa girer?",
     "a": "A Sınıfı", "b": "B Sınıfı", "c": "C Sınıfı", "d": "D Sınıfı", "e": "F Sınıfı",
     "cevap": "C"
   },
@@ -385,30 +385,35 @@
     "cevap": "B"
   },
   {
-    "soru": "Deprem anında bina içerisindeyseniz yapılması gereken en doğru hareket hangisidir?",
+    "soru": "Deprem anında bina içerisinde yapılması gereken en doğru hareket nedir?",
     "a": "Balkona çıkmak", "b": "Merdivenlere koşmak", "c": "Çök-Kapan-Tutun yöntemini uygulamak", "d": "Pencereden atlamak", "e": "Asansöre binmek",
     "cevap": "C"
   },
   {
-    "soru": "Yangın yerindeki tehlikelerden olan 'LPG tüpü patlaması' ne tür bir tehlikedir?",
+    "soru": "Yangın yerindeki tehlikelerden olan 'LPG tüpü patlaması' ne tür tehlikedir?",
     "a": "Kimyasal", "b": "Fiziksel", "c": "Biyolojik", "d": "Psikolojik", "e": "Nükleer",
     "cevap": "B"
   },
   {
-    "soru": "İtfaiye teşkilatının telefon numarası kaçtır?",
-    "a": "110 (veya güncel 112)", "b": "155", "c": "156", "d": "177", "e": "184",
+    "soru": "İtfaiye teşkilatının güncel telefon numarası kaçtır?",
+    "a": "112", "b": "155", "c": "156", "d": "177", "e": "184",
     "cevap": "A"
   },
   {
-    "soru": "İlk yardımda temel yaşam desteği sağlarken göğüs basısı/suni solunum oranı nedir?",
+    "soru": "İlk yardımda temel yaşam desteğinde göğüs basısı/suni solunum oranı nedir?",
     "a": "15/2", "b": "30/2", "c": "5/1", "d": "10/2", "e": "20/5",
     "cevap": "B"
   },
   {
-    "soru": "Hava yolu tam tıkanmış (konuşamayan, moraran) bir kişiye hangi manevra uygulanır?",
+    "soru": "Hava yolu tam tıkanmış bir kişiye hangi manevra uygulanır?",
     "a": "Rentek Manevrası", "b": "Heimlich Manevrası", "c": "Şok Pozisyonu", "d": "Koma Pozisyonu", "e": "Kalp Masajı",
     "cevap": "B"
   },
   {
     "soru": "İlk yardımda 'Bak-Dinle-Hisset' yöntemi ile ne kontrol edilir?",
-    "a": "Kanama", "b": "Kırık", "c": "Sol
+    "a": "Kanama", "b": "Kırık", "c": "Solunum", "d": "Nabız", "e": "Görme yetisi",
+    "cevap": "C"
+  },
+  {
+    "soru": "Kanamayı durdurmak için parmakla bası uygulaması nereye yapılır?",
+    "a": "Kanayan yerin tam üzerine", "b": "Kalbe uzak bir yere", "c": "Kemik olmayan yere", "d": "
