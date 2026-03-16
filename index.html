@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anfa ÖGG Sınav Platformu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div id="splash">
+        <img src="assets/anfa.gif" alt="Logo">
+        <h2 style="color: #2c3e50;">ANFA GÜVENLİK</h2>
+    </div>
+
+    <header id="main-header" style="display:none;">
+        <div class="header-left">
+            <img src="assets/logo.png" height="40">
+        </div>
+        <div class="header-right">
+            <button class="settings-trigger" onclick="toggleMenu()"><i class="fas fa-cog"></i> Ayarlar</button>
+        </div>
+    </header>
+
+    <div id="side-menu" class="side-menu">
+        <h3>İşlemler</h3>
+        <button onclick="adminGiris()"><i class="fas fa-user-shield"></i> Admin Paneli</button>
+        <button onclick="sonucIndir()"><i class="fas fa-file-pdf"></i> Sonuçları İndir</button>
+        <button onclick="location.reload()"><i class="fas fa-redo"></i> Sınavı Sıfırla</button>
+        <button onclick="toggleMenu()" class="close-btn">Kapat</button>
+    </div>
+
+    <div id="entry-screen" class="container" style="display:none;">
+        <div class="card shadow">
+            <h1>Sınav Girişi</h1>
+            <p>Lütfen sınav türünü ve modunu seçiniz.</p>
+            
+            <div class="selection-group">
+                <label>Sınav Türü:</label>
+                <div class="btn-group">
+                    <button id="btn-silahli" class="toggle-btn active" onclick="setTur('silahli')">Silahlı (120 Soru)</button>
+                    <button id="btn-silahsiz" class="toggle-btn" onclick="setTur('silahsiz')">Silahsız (100 Soru)</button>
+                </div>
+            </div>
+
+            <div class="selection-group">
+                <label>Sınav Modu:</label>
+                <div class="btn-group">
+                    <button id="btn-sureli" class="toggle-btn active" onclick="setMod('sureli')">Süreli (165 Dk)</button>
+                    <button id="btn-suresiz" class="toggle-btn" onclick="setMod('suresiz')">Süresiz</button>
+                </div>
+            </div>
+
+            <button class="start-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
+        </div>
+    </div>
+
+    <div id="quiz-screen" class="container" style="display:none;">
+        <div class="quiz-info card shadow">
+            <span id="timer"><i class="fas fa-clock"></i> 165:00</span>
+            <span id="q-counter">Soru: 1 / 120</span>
+        </div>
+
+        <div class="question-card card shadow">
+            <div class="pdf-container">
+                <iframe id="pdf-viewer" src="sinav.pdf#toolbar=0" width="100%" height="450px"></iframe>
+            </div>
+        </div>
+
+        <div class="action-card card shadow">
+            <div class="option-list">
+                <button class="opt-btn" onclick="cevapla('A')"><span>A</span> Şıkkı</button>
+                <button class="opt-btn" onclick="cevapla('B')"><span>B</span> Şıkkı</button>
+                <button class="opt-btn" onclick="cevapla('C')"><span>C</span> Şıkkı</button>
+                <button class="opt-btn" onclick="cevapla('D')"><span>D</span> Şıkkı</button>
+                <button class="opt-btn" onclick="cevapla('E')"><span>E</span> Şıkkı</button>
+            </div>
+            <button class="skip-btn" onclick="atla()">Bu Soruyu Atla</button>
+        </div>
+    </div>
+
+    <div id="admin-panel" class="modal" style="display:none;">
+        <div class="modal-content card">
+            <h2>Admin Soru Yönetimi</h2>
+            <textarea id="cevap-input" placeholder="Cevap anahtarını bitişik yazın (Örn: ABCDE...)"></textarea>
+            <button class="start-btn" onclick="kaydetAdmin()">Kaydet ve Çık</button>
+            <button class="skip-btn" onclick="closeAdmin()">Vazgeç</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
