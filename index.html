@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <meta name="theme-color" content="#00d2ff">
 </head>
 <body>
 
     <div class="water-bg"></div>
 
     <div id="splash">
-        <img src="assets/anfa.gif" alt="Yükleniyor..." onerror="this.src='https://via.placeholder.com/150?text=ANFA'">
-        <h2 style="color: #00d2ff; margin-top: 20px; font-family: sans-serif;">ANFA GÜVENLİK</h2>
+        <img src="anfa.gif" alt="Yükleniyor..." class="splash-gif">
     </div>
 
     <header id="main-header" style="display:none;">
@@ -25,11 +23,11 @@
 
     <div id="side-menu" class="side-menu">
         <div class="menu-content">
-            <h3>MENÜ</h3>
-            <button onclick="adminGiris()"><i class="fas fa-lock"></i> Cevap Anahtarı (Admin)</button>
-            <button onclick="pencereAc()"><i class="fas fa-file-pdf"></i> Soruları PDF İndir</button>
+            <h3>AYARLAR</h3>
+            <button onclick="adminGiris()"><i class="fas fa-lock"></i> Admin Paneli</button>
+            <button onclick="pencereAc()"><i class="fas fa-file-pdf"></i> Soruları İndir</button>
             <hr>
-            <button onclick="location.reload()"><i class="fas fa-sync"></i> Güncellemeleri Denetle</button>
+            <button onclick="location.reload()"><i class="fas fa-sync"></i> Sistemi Güncelle</button>
             <button onclick="toggleMenu()" class="close-btn">Kapat</button>
         </div>
     </div>
@@ -46,7 +44,7 @@
         <div class="glass-card">
             <h2>MOD</h2>
             <div class="selection-box">
-                <div class="option active" id="opt-sureli" onclick="setMod('sureli')"><i class="fas fa-stopwatch"></i><br>165 Dakika</div>
+                <div class="option active" id="opt-sureli" onclick="setMod('sureli')"><i class="fas fa-stopwatch"></i><br>Süreli</div>
                 <div class="option" id="opt-suresiz" onclick="setMod('suresiz')"><i class="fas fa-infinity"></i><br>Süresiz</div>
             </div>
         </div>
@@ -63,9 +61,7 @@
         </div>
         
         <div class="pdf-card glass-card">
-            <i class="fas fa-file-alt" style="font-size: 30px; color: #ff4b2b;"></i>
-            <p>Soru kitapçığı şu an aktif.</p>
-            <button class="pdf-btn" onclick="pencereAc()">SORULARI AÇ (PDF)</button>
+            <button class="pdf-btn" onclick="pencereAc()">KİTAPÇIĞI AÇ (sorular.pdf)</button>
         </div>
 
         <div class="answer-section">
@@ -81,11 +77,10 @@
 
     <div id="admin-modal" class="modal" style="display:none;">
         <div class="modal-content glass-card">
-            <h3>Cevap Anahtarı Girişi</h3>
-            <p>120 soruyu boşluksuz girin (Örn: ABCDE...)</p>
-            <textarea id="cevap-input" rows="6" placeholder="Cevapları buraya yapıştırın..."></textarea>
-            <button class="glow-button" onclick="kaydetAdmin()">SİSTEME İŞLE</button>
-            <button onclick="closeAdmin()" class="skip-btn">İptal</button>
+            <h3>Cevap Anahtarı</h3>
+            <textarea id="cevap-input" rows="6" placeholder="Bitişik yazın..."></textarea>
+            <button class="glow-button" onclick="kaydetAdmin()">KAYDET</button>
+            <button onclick="closeAdmin()" class="skip-btn">Vazgeç</button>
         </div>
     </div>
 
