@@ -2,32 +2,34 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ANFA ÖGG AKADEMİ</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="theme-color" content="#00d2ff">
 </head>
 <body>
 
     <div class="water-bg"></div>
 
     <div id="splash">
-        <img src="assets/anfa.gif" alt="Yükleniyor...">
-        <h2 style="color: #00d2ff; margin-top: 20px;">ANFA GÜVENLİK SİSTEMİ</h2>
+        <img src="assets/anfa.gif" alt="Yükleniyor..." onerror="this.src='https://via.placeholder.com/150?text=ANFA'">
+        <h2 style="color: #00d2ff; margin-top: 20px; font-family: sans-serif;">ANFA GÜVENLİK</h2>
     </div>
 
     <header id="main-header" style="display:none;">
         <div class="logo-area"><strong>ANFA</strong> <span>AKADEMİ</span></div>
-        <button class="settings-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <button class="menu-trigger" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     </header>
 
     <div id="side-menu" class="side-menu">
         <div class="menu-content">
-            <h3>AYARLAR</h3>
-            <button onclick="adminGiris()"><i class="fas fa-lock"></i> Admin Paneli</button>
-            <button onclick="pencereAc()"><i class="fas fa-file-pdf"></i> Soru Kitapçığını İndir</button>
+            <h3>MENÜ</h3>
+            <button onclick="adminGiris()"><i class="fas fa-lock"></i> Cevap Anahtarı (Admin)</button>
+            <button onclick="pencereAc()"><i class="fas fa-file-pdf"></i> Soruları PDF İndir</button>
             <hr>
-            <button onclick="location.reload()"><i class="fas fa-sync"></i> Güncellemeleri Kontrol Et</button>
+            <button onclick="location.reload()"><i class="fas fa-sync"></i> Güncellemeleri Denetle</button>
             <button onclick="toggleMenu()" class="close-btn">Kapat</button>
         </div>
     </div>
@@ -36,16 +38,16 @@
         <div class="glass-card">
             <h2>SINAV TÜRÜ</h2>
             <div class="selection-box">
-                <div class="option active" id="opt-silahli" onclick="setTur('silahli')"><i class="fas fa-crosshairs"></i><span>Silahlı</span></div>
-                <div class="option" id="opt-silahsiz" onclick="setTur('silahsiz')"><i class="fas fa-user-shield"></i><span>Silahsız</span></div>
+                <div class="option active" id="opt-silahli" onclick="setTur('silahli')"><i class="fas fa-crosshairs"></i><br>Silahlı</div>
+                <div class="option" id="opt-silahsiz" onclick="setTur('silahsiz')"><i class="fas fa-user-shield"></i><br>Silahsız</div>
             </div>
         </div>
 
         <div class="glass-card">
-            <h2>ZAMANLAMA</h2>
+            <h2>MOD</h2>
             <div class="selection-box">
-                <div class="option active" id="opt-sureli" onclick="setMod('sureli')"><i class="fas fa-stopwatch"></i><span>Süreli</span></div>
-                <div class="option" id="opt-suresiz" onclick="setMod('suresiz')"><i class="fas fa-infinity"></i><span>Süresiz</span></div>
+                <div class="option active" id="opt-sureli" onclick="setMod('sureli')"><i class="fas fa-stopwatch"></i><br>165 Dakika</div>
+                <div class="option" id="opt-suresiz" onclick="setMod('suresiz')"><i class="fas fa-infinity"></i><br>Süresiz</div>
             </div>
         </div>
 
@@ -60,13 +62,13 @@
             <span id="q-counter">Soru: 1</span>
         </div>
         
-        <div class="pdf-alt-card glass-card">
-            <i class="fas fa-file-pdf" style="font-size: 40px; color: #ff4b2b;"></i>
-            <h3>Kitapçık Açık</h3>
-            <button class="view-pdf-btn" onclick="pencereAc()">SORULARI GÖR (PDF)</button>
+        <div class="pdf-card glass-card">
+            <i class="fas fa-file-alt" style="font-size: 30px; color: #ff4b2b;"></i>
+            <p>Soru kitapçığı şu an aktif.</p>
+            <button class="pdf-btn" onclick="pencereAc()">SORULARI AÇ (PDF)</button>
         </div>
 
-        <div class="answer-box">
+        <div class="answer-section">
             <div class="options-grid" id="options-container">
                 <button class="opt-btn" onclick="cevapla('A', this)">A</button>
                 <button class="opt-btn" onclick="cevapla('B', this)">B</button>
@@ -79,10 +81,11 @@
 
     <div id="admin-modal" class="modal" style="display:none;">
         <div class="modal-content glass-card">
-            <h3>Admin Girişi</h3>
-            <textarea id="cevap-input" rows="5" placeholder="120 soruyu bitişik yazın..."></textarea>
-            <button class="glow-button" onclick="kaydetAdmin()">KAYDET</button>
-            <button onclick="closeAdmin()" class="skip-btn">Kapat</button>
+            <h3>Cevap Anahtarı Girişi</h3>
+            <p>120 soruyu boşluksuz girin (Örn: ABCDE...)</p>
+            <textarea id="cevap-input" rows="6" placeholder="Cevapları buraya yapıştırın..."></textarea>
+            <button class="glow-button" onclick="kaydetAdmin()">SİSTEME İŞLE</button>
+            <button onclick="closeAdmin()" class="skip-btn">İptal</button>
         </div>
     </div>
 
