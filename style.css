@@ -1,7 +1,36 @@
-/* PWA YÜKLE BARI */
-#install-banner { position: fixed; bottom: 0; left: 0; width: 100%; background: #27ae60; padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 9998; box-sizing: border-box; }
-#install-banner span { color: white; font-weight: bold; font-size: 1rem; }
-#install-banner button { background: white; color: black; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+:root { --primary: #00d2ff; --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f8fafc; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
 
-/* ADMİN MODALI */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10001; display: flex; justify-content: center; align-items: center; padding: 20px; }
+#splash { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; }
+.splash-gif { width: 100%; height: 100%; object-fit: cover; }
+
+header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.logo { font-size: 1.4rem; letter-spacing: 1px; }
+.logo strong { color: var(--primary); }
+.menu-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+.side-menu { position: fixed; right: -320px; top: 0; width: 280px; height: 100%; background: #1e293b; z-index: 10000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+.side-menu.active { right: 0; }
+.menu-header { font-weight: bold; color: var(--primary); margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px solid #334155; }
+.side-menu button { width: 100%; padding: 14px; margin-bottom: 12px; background: #334155; color: white; border: none; border-radius: 10px; text-align: left; font-size: 0.95rem; cursor: pointer; }
+
+.container { padding: 20px; max-width: 550px; margin: auto; }
+.hero-card, .glass-card { background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+.selection-group { display: flex; gap: 12px; margin-bottom: 15px; }
+.opt { flex: 1; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 14px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
+.opt.active { background: var(--primary); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--primary); }
+
+.main-btn { width: 100%; padding: 18px; border-radius: 16px; background: var(--primary); color: #000; border: none; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+.main-btn.success { background: #10b981; color: white; }
+
+.stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; color: var(--primary); }
+.question-container { text-align: left; min-height: 100px; margin-bottom: 20px; }
+
+.choice-btn { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: white; text-align: left; transition: 0.2s; cursor: pointer; }
+.choice-btn.correct { background: #10b981 !important; border-color: #34d399 !important; font-weight: bold; }
+.choice-btn.wrong { background: #ef4444 !important; border-color: #f87171 !important; }
+
+#install-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; background: #1e293b; border: 1px solid var(--primary); padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 9000; }
+
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 20000; display: flex; justify-content: center; align-items: center; padding: 20px; }
