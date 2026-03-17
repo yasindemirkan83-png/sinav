@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ANFA ÖGG AKADEMİ</title>
-    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00d2ff">
-    <link rel="apple-touch-icon" href="anfa.gif">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -18,58 +15,59 @@
     <div id="splash"><img src="anfa.gif" class="splash-gif"></div>
 
     <div id="install-banner" style="display:none;">
-        <span><i class="fas fa-download"></i> ANFA Akademi'yi Telefona Kur</span>
+        <span><i class="fas fa-mobile-alt"></i> Uygulamayı Yükle</span>
         <button onclick="installApp()">YÜKLE</button>
     </div>
 
     <header id="main-header" style="display:none;">
         <div class="logo"><strong>ANFA</strong> <span>AKADEMİ</span></div>
-        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-cog"></i></button>
     </header>
 
     <div id="side-menu" class="side-menu">
-        <div class="menu-header">AYARLAR</div>
-        <button onclick="adminPanelAc()"><i class="fas fa-upload"></i> Soru Yükle (Admin)</button>
-        <button onclick="kullaniciCevaplariPdfIndir()"><i class="fas fa-user-check"></i> Kullanıcı Cevaplarını İndir</button>
-        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-book"></i> Eğitim Sorularını İndir</button>
-        <button onclick="istatistikSifirla()"><i class="fas fa-sync"></i> Sistemi Sıfırla</button>
+        <div class="menu-header">YÖNETİM & AYARLAR</div>
+        <button onclick="adminGirisKontrol()"><i class="fas fa-lock"></i> Soru Yükle (Admin)</button>
+        <button onclick="kullaniciCevaplariPdfIndir()"><i class="fas fa-history"></i> Son Sınav Cevaplarım</button>
+        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-download"></i> Eğitim Kitapçığı İndir</button>
+        <button onclick="istatistikSifirla()" style="color:#ff4d4d;"><i class="fas fa-trash"></i> Verileri Temizle</button>
         <hr>
         <button onclick="toggleMenu()" class="close-btn">Kapat</button>
     </div>
 
     <div id="admin-modal" class="modal" style="display:none;">
-        <div class="glass-card">
-            <h3>SORU YÜKLE (JSON)</h3>
-            <p>Hazırladığın sorular.json dosyasını seç ve sisteme kaydet.</p>
-            <input type="file" id="json-upload" accept=".json" onchange="jsonCihazaKaydet(event)" style="margin-bottom: 15px; color: white;">
-            <button class="glow-btn" onclick="adminPanelKapat()" style="background: #e74c3c;">Kapat</button>
+        <div class="glass-card admin-box">
+            <h3><i class="fas fa-database"></i> Soru Güncelleme</h3>
+            <p>Lütfen .json formatındaki soru dosyasını seçin.</p>
+            <input type="file" id="json-upload" accept=".json" onchange="jsonCihazaKaydet(event)">
+            <button class="glow-btn" onclick="adminPanelKapat()" style="background:#444; margin-top:10px;">Vazgeç</button>
         </div>
     </div>
 
     <div id="entry-screen" class="container" style="display:none;">
-        <div class="glass-card">
-            <h2>SINAV KATEGORİSİ</h2>
-            <div class="selection-grid">
+        <div class="hero-card">
+            <h1>Hoş Geldiniz</h1>
+            <p>Sınav türünü seçerek hemen başlayın.</p>
+            <div class="selection-group">
                 <div id="opt-silahli" class="opt active" onclick="setTur('silahli')">SİLAHLI</div>
                 <div id="opt-silahsiz" class="opt" onclick="setTur('silahsiz')">SİLAHSIZ</div>
             </div>
-            <div class="selection-grid">
+            <div class="selection-group">
                 <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
                 <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
             </div>
-            <button class="glow-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
+            <button class="main-btn" onclick="sinaviBaslat()">BAŞLAT</button>
         </div>
     </div>
 
     <div id="quiz-screen" class="container" style="display:none;">
-        <div class="quiz-header">
+        <div class="stats-bar">
             <span id="timer"><i class="fas fa-clock"></i> 165:00</span>
-            <span id="q-counter">Soru: 1</span>
+            <span id="q-counter">1 / 120</span>
         </div>
-        <div class="question-box glass-card">
-            <p id="q-text">Soru yükleniyor...</p>
+        <div class="question-container glass-card">
+            <p id="q-text"></p>
         </div>
-        <div class="options-area" id="options-parent">
+        <div class="options-grid" id="options-parent">
             <button id="btn-A" class="choice-btn" onclick="cevapla('A', this)"></button>
             <button id="btn-B" class="choice-btn" onclick="cevapla('B', this)"></button>
             <button id="btn-C" class="choice-btn" onclick="cevapla('C', this)"></button>
@@ -79,19 +77,16 @@
     </div>
 
     <div id="result-screen" class="container" style="display:none;">
-        <div class="glass-card">
-            <h2>SINAV SONUCU</h2>
-            <p id="result-text" style="font-size: 1.2rem; line-height: 2;"></p>
-            <button class="glow-btn" onclick="sonucPdfIndir()" style="background: #27ae60; margin-bottom: 15px;"><i class="fas fa-file-pdf"></i> SONUCU İNDİR</button>
-            <button class="glow-btn" onclick="location.reload()"><i class="fas fa-home"></i> ANA SAYFA</button>
+        <div class="glass-card result-box">
+            <h2>Sınav Tamamlandı</h2>
+            <div id="score-circle">
+                <span id="result-text"></span>
+            </div>
+            <button class="main-btn success" onclick="sonucPdfIndir()"><i class="fas fa-file-pdf"></i> SONUCU İNDİR</button>
+            <button class="main-btn" onclick="location.reload()" style="margin-top:10px;"><i class="fas fa-redo"></i> TEKRAR DENE</button>
         </div>
     </div>
 
     <script src="app.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').then(() => console.log("PWA Aktif"));
-        }
-    </script>
 </body>
 </html>
