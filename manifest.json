@@ -1,17 +1,15 @@
 {
-  "name": "ANFA ÖGG AKADEMİ",
-  "short_name": "ANFA",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#0a0e14",
-  "theme_color": "#00d2ff",
+  "short_name": "ANFA AKADEMİ",
+  "name": "ANFA ÖGG AKADEMİ SINAV SİSTEMİ",
   "icons": [
     {
       "src": "anfa.gif",
-      "sizes": "512x512",
-      "type": "image/gif",
-      "purpose": "any maskable"
+      "sizes": "192x192",
+      "type": "image/gif"
     }
-  ]
+  ],
+  "start_url": "index.html",
+  "background_color": "#0f172a",
+  "theme_color": "#00d2ff",
+  "display": "standalone"
 }
