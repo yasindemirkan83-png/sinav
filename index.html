@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ANFA AKADEMİ</title>
+    <title>ANFA ÖGG AKADEMİ</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00d2ff">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,50 +14,54 @@
 
     <div id="splash"><img src="anfa.gif" class="splash-gif"></div>
 
-    <div id="pwa-install-banner" class="pwa-banner" style="display:none;">
-        <div class="pwa-content">
-            <i class="fas fa-cloud-download-alt"></i>
-            <span>Uygulamayı telefonunuza yükleyin</span>
-        </div>
-        <button onclick="installApp()" class="pwa-install-btn">YÜKLE</button>
+    <div id="install-banner" class="install-bar" style="display:none;">
+        <span><i class="fas fa-mobile-alt"></i> Uygulamayı Ana Ekrana Ekle</span>
+        <button onclick="installApp()" class="pwa-btn">YÜKLE</button>
     </div>
 
     <header id="main-header" style="display:none;">
         <div class="logo"><strong>ANFA</strong> <span>AKADEMİ</span></div>
-        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        <div class="header-right">
+            <button id="pwa-header-btn" class="pwa-mini-btn" style="display:none;" onclick="installApp()">
+                <i class="fas fa-download"></i> Yükle
+            </button>
+            <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-cog"></i></button>
+        </div>
     </header>
 
     <div id="side-menu" class="side-menu">
-        <div class="menu-header">MENÜ</div>
-        <button onclick="kullaniciCevaplariPdfIndir()"><i class="fas fa-history"></i> Son Sonuçlarımı İndir</button>
-        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-book"></i> Eğitim Kitapçığı (PDF)</button>
-        <button onclick="istatistikSifirla()" style="color:#ff4d4d;"><i class="fas fa-trash"></i> Verileri Sıfırla</button>
-        <button onclick="toggleMenu()" class="close-menu-btn">Kapat</button>
+        <div class="menu-header">YÖNETİM & AYARLAR</div>
+        <button onclick="adminGirisKontrol()"><i class="fas fa-lock"></i> Soru Yönetimi (Admin)</button>
+        <button onclick="kullaniciCevaplariPdfIndir()"><i class="fas fa-history"></i> Son Sınav Sonucum</button>
+        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-download"></i> Eğitim Kitapçığı</button>
+        <button onclick="istatistikSifirla()" style="color:#ff4d4d;"><i class="fas fa-trash"></i> Verileri Temizle</button>
+        <hr>
+        <button onclick="toggleMenu()" class="close-btn">Kapat</button>
+    </div>
+
+    <div id="admin-modal" class="modal" style="display:none; padding:0;">
+        <div style="width:100%; height:100%; position:relative; background:#fff;">
+            <div class="admin-nav">
+                <span><i class="fas fa-tools"></i> ANFA Soru Editörü</span>
+                <button onclick="adminPanelKapat()" class="close-admin">KAPAT</button>
+            </div>
+            <iframe src="admin.html" id="admin-frame" style="width:100%; height:calc(100% - 50px); border:none;"></iframe>
+        </div>
     </div>
 
     <div id="entry-screen" class="container" style="display:none;">
         <div class="hero-card">
-            <h1>Sınav Seçimi</h1>
-            
-            <p class="label">Eğitim Türü</p>
+            <h1>Hoş Geldiniz</h1>
+            <p>Sınav türünü seçerek eğitime başlayın.</p>
             <div class="selection-group">
                 <div id="opt-silahli" class="opt active" onclick="setTur('silahli')">SİLAHLI</div>
                 <div id="opt-silahsiz" class="opt" onclick="setTur('silahsiz')">SİLAHSIZ</div>
             </div>
-
-            <p class="label">Soru Sıralaması</p>
-            <div class="selection-group">
-                <div id="opt-karisik" class="opt active" onclick="setSira('karisik')">KARIŞIK</div>
-                <div id="opt-sirali" class="opt" onclick="setSira('sirali')">SIRALI</div>
-            </div>
-
-            <p class="label">Zamanlama</p>
             <div class="selection-group">
                 <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
                 <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
             </div>
-
-            <button class="main-btn" onclick="sinaviBaslat()">BAŞLAT</button>
+            <button class="main-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
         </div>
     </div>
 
@@ -66,7 +70,8 @@
             <span id="timer"><i class="fas fa-clock"></i> 165:00</span>
             <span id="q-counter">1 / 120</span>
         </div>
-        <div class="question-container glass-card" id="q-area"></div>
+        <div class="question-container glass-card" id="q-area">
+            </div>
         <div class="options-grid" id="options-parent">
             <button id="btn-A" class="choice-btn" onclick="cevapla('A', this)"></button>
             <button id="btn-B" class="choice-btn" onclick="cevapla('B', this)"></button>
@@ -77,11 +82,11 @@
     </div>
 
     <div id="result-screen" class="container" style="display:none;">
-        <div class="glass-card result-box">
-            <h2>Sınav Bitti</h2>
-            <div id="result-text"></div>
-            <button class="main-btn success" onclick="sonucPdfIndir()">PDF SONUÇ AL</button>
-            <button class="main-btn" onclick="location.reload()">TEKRAR DENE</button>
+        <div class="glass-card result-box" style="text-align:center;">
+            <h2>Sınav Tamamlandı</h2>
+            <div id="result-text" style="font-size: 1.3rem; margin: 20px 0; font-weight: bold;"></div>
+            <button class="main-btn success" onclick="sonucPdfIndir()"><i class="fas fa-file-pdf"></i> SONUCU İNDİR</button>
+            <button class="main-btn" onclick="location.reload()" style="margin-top:10px;"><i class="fas fa-home"></i> ANASAYFA</button>
         </div>
     </div>
 
