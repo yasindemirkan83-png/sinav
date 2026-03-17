@@ -17,6 +17,11 @@
 
     <div id="splash"><img src="anfa.gif" class="splash-gif"></div>
 
+    <div id="install-banner" style="display:none;">
+        <span><i class="fas fa-download"></i> ANFA Akademi'yi Telefona Kur</span>
+        <button onclick="installApp()">YÜKLE</button>
+    </div>
+
     <header id="main-header" style="display:none;">
         <div class="logo"><strong>ANFA</strong> <span>AKADEMİ</span></div>
         <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
@@ -24,11 +29,21 @@
 
     <div id="side-menu" class="side-menu">
         <div class="menu-header">AYARLAR</div>
+        <button onclick="adminPanelAc()"><i class="fas fa-upload"></i> Soru Yükle (Admin)</button>
+        <button onclick="kullaniciCevaplariPdfIndir()"><i class="fas fa-user-check"></i> Kullanıcı Cevaplarını İndir</button>
+        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-book"></i> Eğitim Sorularını İndir</button>
         <button onclick="istatistikSifirla()"><i class="fas fa-sync"></i> Sistemi Sıfırla</button>
-        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-file-pdf"></i> Eğitim Sorularını İndir</button>
-        <button onclick="location.reload()"><i class="fas fa-redo"></i> Güncellemeleri Denetle</button>
         <hr>
         <button onclick="toggleMenu()" class="close-btn">Kapat</button>
+    </div>
+
+    <div id="admin-modal" class="modal" style="display:none;">
+        <div class="glass-card">
+            <h3>SORU YÜKLE (JSON)</h3>
+            <p>Hazırladığın sorular.json dosyasını seç ve sisteme kaydet.</p>
+            <input type="file" id="json-upload" accept=".json" onchange="jsonCihazaKaydet(event)" style="margin-bottom: 15px; color: white;">
+            <button class="glow-btn" onclick="adminPanelKapat()" style="background: #e74c3c;">Kapat</button>
+        </div>
     </div>
 
     <div id="entry-screen" class="container" style="display:none;">
@@ -42,7 +57,7 @@
                 <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
                 <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
             </div>
-            <button class="glow-btn" id="baslat-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
+            <button class="glow-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
         </div>
     </div>
 
@@ -67,8 +82,8 @@
         <div class="glass-card">
             <h2>SINAV SONUCU</h2>
             <p id="result-text" style="font-size: 1.2rem; line-height: 2;"></p>
-            <button class="glow-btn" onclick="sonucPdfIndir()" style="background: #27ae60; margin-bottom: 15px;"><i class="fas fa-file-download"></i> KENDİ CEVAPLARINI İNDİR</button>
-            <button class="glow-btn" onclick="location.reload()"><i class="fas fa-home"></i> ANA SAYFAYA DÖN</button>
+            <button class="glow-btn" onclick="sonucPdfIndir()" style="background: #27ae60; margin-bottom: 15px;"><i class="fas fa-file-pdf"></i> SONUCU İNDİR</button>
+            <button class="glow-btn" onclick="location.reload()"><i class="fas fa-home"></i> ANA SAYFA</button>
         </div>
     </div>
 
