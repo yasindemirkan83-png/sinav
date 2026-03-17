@@ -1,10 +1,12 @@
-const CACHE_NAME = 'anfa-v2';
-const assets = ['/', '/index.html', '/style.css', '/app.js', '/sorular.json', '/anfa.gif'];
-
 self.addEventListener('install', (e) => {
-    e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(assets)));
+    self.skipWaiting();
 });
 
 self.addEventListener('fetch', (e) => {
-    e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+    // Sadece sorular.json hariç diğerlerini cache'den çekmeye çalış
+    if (e.request.url.includes('sorular.json')) {
+        e.respondWith(fetch(e.request));
+    } else {
+        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    }
 });
