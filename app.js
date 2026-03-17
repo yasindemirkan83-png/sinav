@@ -4,18 +4,51 @@ let tur = 'silahli', mod = 'sureli', sira = 'karisik', deferredPrompt;
 
 const JSON_URL = "https://raw.githubusercontent.com/yasindemirkan83-png/sinav/Sw.js/cevaplar.json";
 
-// PWA Servis Kaydı
+// 1. PWA Servis Kaydı ve Yükleme Mantığı
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Service Worker Kayıt Başarılı"))
+        .catch(err => console.log("SW Kayıt Hatası:", err));
 }
 
-// Otomatik Yükleme Butonu Yakalayıcı
+// Otomatik Yükleme Butonu Yakalayıcı (Tarayıcı hazır olduğunda tetiklenir)
 window.addEventListener('beforeinstallprompt', (e) => {
+    // Tarayıcının varsayılan yükleme penceresini engelle
     e.preventDefault();
+    // Olayı sakla ki butonla tetikleyebilelim
     deferredPrompt = e;
-    document.getElementById('pwa-install-banner').style.display = 'flex';
+    
+    // index.html içindeki banner ve header butonlarını görünür yap
+    const installBanner = document.getElementById('install-banner');
+    const headerInstallBtn = document.getElementById('pwa-header-btn');
+    
+    if (installBanner) installBanner.style.display = 'flex';
+    if (headerInstallBtn) headerInstallBtn.style.display = 'block';
 });
 
+// Yükle Butonuna Basıldığında Çalışacak Fonksiyon
+async function installApp() {
+    if (!deferredPrompt) return;
+
+    // Yükleme istemini göster
+    deferredPrompt.prompt();
+
+    // Kullanıcının yanıtını bekle
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Kullanıcı yükleme kararı: ${outcome}`);
+
+    // Karar verildikten sonra istemi temizle
+    deferredPrompt = null;
+
+    // Butonları tekrar gizle
+    const installBanner = document.getElementById('install-banner');
+    const headerInstallBtn = document.getElementById('pwa-header-btn');
+    
+    if (installBanner) installBanner.style.display = 'none';
+    if (headerInstallBtn) headerInstallBtn.style.display = 'none';
+}
+
+// 2. Başlangıç ve Veri Çekme
 window.onload = async () => {
     tumVeri = JSON.parse(localStorage.getItem('anfa_sorular')) || [];
     setTimeout(() => {
@@ -33,30 +66,16 @@ async function fetchData() {
             tumVeri = await res.json();
             localStorage.setItem('anfa_sorular', JSON.stringify(tumVeri));
         }
-    } catch(e) { console.log("Çevrimdışı Mod Aktif."); }
-}
-
-function installApp() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => {
-            document.getElementById('pwa-install-banner').style.display = 'none';
-            deferredPrompt = null;
-        });
+    } catch(e) { 
+        console.log("Çevrimdışı Mod: Yerel veriler kullanılıyor."); 
     }
 }
 
-// Seçim Fonksiyonları
+// 3. Seçim ve Sınav Fonksiyonları
 function setTur(t) { 
     tur = t; 
     document.querySelectorAll('#opt-silahli, #opt-silahsiz').forEach(el => el.classList.remove('active'));
     document.getElementById('opt-' + t).classList.add('active');
-}
-
-function setSira(s) { 
-    sira = s; 
-    document.querySelectorAll('#opt-karisik, #opt-sirali').forEach(el => el.classList.remove('active'));
-    document.getElementById('opt-' + s).classList.add('active');
 }
 
 function setMod(m) { 
@@ -70,13 +89,10 @@ function sinaviBaslat() {
     
     let liste = (tur === 'silahli') ? [...tumVeri] : [...tumVeri.slice(0, 100)];
     
-    if(sira === 'karisik') {
-        aktifSorular = liste.sort(() => Math.random() - 0.5);
-    } else {
-        aktifSorular = liste; // Sıralı
-    }
+    // Karışık veya Sıralı mantığı (Varsayılan karışık)
+    aktifSorular = liste.sort(() => Math.random() - 0.5);
 
-    index = 0; dogruS = 0; yanlisS = 0;
+    index = 0; dogruS = 0; yanlisS = 0; kullaniciCevaplari = [];
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
     if(mod === 'sureli') startTimer();
@@ -103,6 +119,9 @@ function soruGoster() {
 
 function cevapla(secim, btn) {
     const dogru = aktifSorular[index].cevap;
+    const buttons = document.querySelectorAll('.choice-btn');
+    
+    // Tıklamayı geçici olarak engelle
     document.getElementById('options-parent').style.pointerEvents = 'none';
     
     kullaniciCevaplari.push({s: aktifSorular[index].soru, c: secim, d: dogru});
@@ -119,7 +138,11 @@ function cevapla(secim, btn) {
     setTimeout(() => {
         document.getElementById('options-parent').style.pointerEvents = 'auto';
         index++;
-        if(index < aktifSorular.length) soruGoster(); else bitir();
+        if(index < aktifSorular.length) {
+            soruGoster();
+        } else {
+            bitir();
+        }
     }, 1000);
 }
 
@@ -144,6 +167,7 @@ function startTimer() {
     }, 1000);
 }
 
+// 4. Menü ve PDF İşlemleri
 function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
 
 function istatistikSifirla() {
@@ -153,7 +177,6 @@ function istatistikSifirla() {
     }
 }
 
-// PDF Sistemleri
 function pdfYap(data, isim) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -173,4 +196,12 @@ function kullaniciCevaplariPdfIndir() {
     const old = JSON.parse(localStorage.getItem('son_sonuc'));
     if(!old) return alert("Henüz kayıtlı bir sınavınız yok.");
     pdfYap(old, "Gecmis_Sonuc.pdf");
+}
+
+function adminGirisKontrol() {
+    document.getElementById('admin-modal').style.display = 'block';
+}
+
+function adminPanelKapat() {
+    document.getElementById('admin-modal').style.display = 'none';
 }
