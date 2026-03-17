@@ -4,51 +4,41 @@ let tur = 'silahli', mod = 'sureli', sira = 'karisik', deferredPrompt;
 
 const JSON_URL = "https://raw.githubusercontent.com/yasindemirkan83-png/sinav/Sw.js/cevaplar.json";
 
-// 1. PWA Servis Kaydı ve Yükleme Mantığı
+// --- PWA SİSTEMİ BAŞLANGIÇ ---
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-        .then(() => console.log("Service Worker Kayıt Başarılı"))
-        .catch(err => console.log("SW Kayıt Hatası:", err));
+    navigator.serviceWorker.register('sw.js').then(() => {
+        console.log("Servis Kaydı Tamam!");
+    });
 }
 
-// Otomatik Yükleme Butonu Yakalayıcı (Tarayıcı hazır olduğunda tetiklenir)
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Tarayıcının varsayılan yükleme penceresini engelle
     e.preventDefault();
-    // Olayı sakla ki butonla tetikleyebilelim
     deferredPrompt = e;
-    
-    // index.html içindeki banner ve header butonlarını görünür yap
-    const installBanner = document.getElementById('install-banner');
-    const headerInstallBtn = document.getElementById('pwa-header-btn');
-    
-    if (installBanner) installBanner.style.display = 'flex';
-    if (headerInstallBtn) headerInstallBtn.style.display = 'block';
+    // index.html'deki butonları göster
+    if(document.getElementById('install-banner')) {
+        document.getElementById('install-banner').style.display = 'flex';
+    }
+    if(document.getElementById('pwa-header-btn')) {
+        document.getElementById('pwa-header-btn').style.display = 'block';
+    }
 });
 
-// Yükle Butonuna Basıldığında Çalışacak Fonksiyon
-async function installApp() {
-    if (!deferredPrompt) return;
-
-    // Yükleme istemini göster
-    deferredPrompt.prompt();
-
-    // Kullanıcının yanıtını bekle
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`Kullanıcı yükleme kararı: ${outcome}`);
-
-    // Karar verildikten sonra istemi temizle
-    deferredPrompt = null;
-
-    // Butonları tekrar gizle
-    const installBanner = document.getElementById('install-banner');
-    const headerInstallBtn = document.getElementById('pwa-header-btn');
-    
-    if (installBanner) installBanner.style.display = 'none';
-    if (headerInstallBtn) headerInstallBtn.style.display = 'none';
+function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Kullanıcı uygulamayı yükledi');
+            }
+            // Bannerları gizle
+            document.getElementById('install-banner').style.display = 'none';
+            document.getElementById('pwa-header-btn').style.display = 'none';
+            deferredPrompt = null;
+        });
+    }
 }
+// --- PWA SİSTEMİ BİTİŞ ---
 
-// 2. Başlangıç ve Veri Çekme
 window.onload = async () => {
     tumVeri = JSON.parse(localStorage.getItem('anfa_sorular')) || [];
     setTimeout(() => {
@@ -66,12 +56,9 @@ async function fetchData() {
             tumVeri = await res.json();
             localStorage.setItem('anfa_sorular', JSON.stringify(tumVeri));
         }
-    } catch(e) { 
-        console.log("Çevrimdışı Mod: Yerel veriler kullanılıyor."); 
-    }
+    } catch(e) { console.log("Çevrimdışı Mod Aktif."); }
 }
 
-// 3. Seçim ve Sınav Fonksiyonları
 function setTur(t) { 
     tur = t; 
     document.querySelectorAll('#opt-silahli, #opt-silahsiz').forEach(el => el.classList.remove('active'));
@@ -89,10 +76,10 @@ function sinaviBaslat() {
     
     let liste = (tur === 'silahli') ? [...tumVeri] : [...tumVeri.slice(0, 100)];
     
-    // Karışık veya Sıralı mantığı (Varsayılan karışık)
+    // Orijinal Karıştırma Mantığı
     aktifSorular = liste.sort(() => Math.random() - 0.5);
 
-    index = 0; dogruS = 0; yanlisS = 0; kullaniciCevaplari = [];
+    index = 0; dogruS = 0; yanlisS = 0;
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
     if(mod === 'sureli') startTimer();
@@ -119,9 +106,6 @@ function soruGoster() {
 
 function cevapla(secim, btn) {
     const dogru = aktifSorular[index].cevap;
-    const buttons = document.querySelectorAll('.choice-btn');
-    
-    // Tıklamayı geçici olarak engelle
     document.getElementById('options-parent').style.pointerEvents = 'none';
     
     kullaniciCevaplari.push({s: aktifSorular[index].soru, c: secim, d: dogru});
@@ -138,11 +122,7 @@ function cevapla(secim, btn) {
     setTimeout(() => {
         document.getElementById('options-parent').style.pointerEvents = 'auto';
         index++;
-        if(index < aktifSorular.length) {
-            soruGoster();
-        } else {
-            bitir();
-        }
+        if(index < aktifSorular.length) soruGoster(); else bitir();
     }, 1000);
 }
 
@@ -167,7 +147,6 @@ function startTimer() {
     }, 1000);
 }
 
-// 4. Menü ve PDF İşlemleri
 function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
 
 function istatistikSifirla() {
