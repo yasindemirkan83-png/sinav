@@ -1,12 +1,16 @@
 self.addEventListener('install', (e) => {
-    self.skipWaiting();
+  e.waitUntil(
+    caches.open('anfa-v1').then((cache) => cache.addAll([
+      'index.html',
+      'style.css',
+      'app.js',
+      'anfa.gif'
+    ]))
+  );
 });
 
 self.addEventListener('fetch', (e) => {
-    // Sadece sorular.json hariç diğerlerini cache'den çekmeye çalış
-    if (e.request.url.includes('sorular.json')) {
-        e.respondWith(fetch(e.request));
-    } else {
-        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-    }
+  e.respondWith(
+    caches.match(e.request).then((response) => response || fetch(e.request))
+  );
 });
