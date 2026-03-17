@@ -1,14 +1,15 @@
 let index = 0, dogruS = 0, yanlisS = 0, sure = 165 * 60, timer;
 let aktifSorular = [], tumVeri = [], kullaniciCevaplari = [];
-let tur = 'silahli', mod = 'sureli', deferredPrompt;
+let tur = 'silahli', mod = 'sureli', sira = 'karisik', deferredPrompt;
 
 const JSON_URL = "https://raw.githubusercontent.com/yasindemirkan83-png/sinav/Sw.js/cevaplar.json";
 
-// Service Worker Kaydı
+// PWA Servis Kaydı
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('./sw.js');
 }
 
+// Yükleme Butonu Yakalayıcı
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -16,55 +17,68 @@ window.addEventListener('beforeinstallprompt', (e) => {
     document.getElementById('pwa-header-btn').style.display = 'block';
 });
 
+function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+            document.getElementById('install-banner').style.display = 'none';
+            document.getElementById('pwa-header-btn').style.display = 'none';
+            deferredPrompt = null;
+        });
+    }
+}
+
 window.onload = async () => {
     tumVeri = JSON.parse(localStorage.getItem('anfa_sorular')) || [];
     setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
         document.getElementById('main-header').style.display = 'flex';
         document.getElementById('entry-screen').style.display = 'block';
-        fetchFreshData();
-    }, 4000);
+        fetchData();
+    }, 3000);
 };
 
-async function fetchFreshData() {
+async function fetchData() {
     try {
-        const response = await fetch(JSON_URL + "?v=" + new Date().getTime());
-        if(response.ok) {
-            const data = await response.json();
-            tumVeri = data;
-            localStorage.setItem('anfa_sorular', JSON.stringify(data));
+        const res = await fetch(JSON_URL + "?v=" + Date.now());
+        if(res.ok) {
+            tumVeri = await res.json();
+            localStorage.setItem('anfa_sorular', JSON.stringify(tumVeri));
         }
-    } catch(err) { console.log("Çevrimdışı mod."); }
+    } catch(e) { console.log("Çevrimdışı Mod."); }
 }
 
-function installApp() {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choice) => {
-            if (choice.outcome === 'accepted') {
-                document.getElementById('install-banner').style.display = 'none';
-            }
-            deferredPrompt = null;
-        });
-    }
-}
-
+// Seçim Fonksiyonları
 function setTur(t) { 
     tur = t; 
-    document.getElementById('opt-silahli').className = t==='silahli'?'opt active':'opt'; 
-    document.getElementById('opt-silahsiz').className = t==='silahsiz'?'opt active':'opt'; 
+    document.querySelectorAll('#opt-silahli, #opt-silahsiz').forEach(el => el.classList.remove('active'));
+    document.getElementById('opt-' + t).classList.add('active');
+}
+
+function setSira(s) { 
+    sira = s; 
+    document.querySelectorAll('#opt-karisik, #opt-sirali').forEach(el => el.classList.remove('active'));
+    document.getElementById('opt-' + s).classList.add('active');
 }
 
 function setMod(m) { 
     mod = m; 
-    document.getElementById('opt-sureli').className = m==='sureli'?'opt active':'opt'; 
-    document.getElementById('opt-suresiz').className = m==='suresiz'?'opt active':'opt'; 
+    document.querySelectorAll('#opt-sureli, #opt-suresiz').forEach(el => el.classList.remove('active'));
+    document.getElementById('opt-' + m).classList.add('active');
 }
 
 function sinaviBaslat() {
-    if(tumVeri.length === 0) return alert("Veriler yüklenemedi.");
+    if(tumVeri.length === 0) return alert("Soru paketleri yükleniyor...");
+    
     let liste = (tur === 'silahli') ? [...tumVeri] : [...tumVeri.slice(0, 100)];
-    aktifSorular = liste.sort(() => Math.random() - 0.5);
+    
+    // Karışık / Sıralı Mantığı
+    if(sira === 'karisik') {
+        aktifSorular = liste.sort(() => Math.random() - 0.5);
+    } else {
+        aktifSorular = liste;
+    }
+
     index = 0; dogruS = 0; yanlisS = 0; kullaniciCevaplari = [];
     document.getElementById('entry-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -78,8 +92,8 @@ function soruGoster() {
     const resimUrl = `https://raw.githubusercontent.com/yasindemirkan83-png/sinav/Sw.js/images/${s.id}.jpg`;
 
     qArea.innerHTML = `
-        <img src="${resimUrl}" onerror="this.style.display='none'" style="width:100%; border-radius:15px; margin-bottom:15px;">
-        <div style="font-size:1.1rem; line-height:1.5;">${index + 1}. ${s.soru}</div>
+        <img src="${resimUrl}" onerror="this.style.display='none'" class="q-img">
+        <div class="q-text">${index + 1}. ${s.soru}</div>
     `;
 
     ['A','B','C','D','E'].forEach(h => {
@@ -95,9 +109,11 @@ function cevapla(secim, btn) {
     document.getElementById('options-parent').style.pointerEvents = 'none';
     kullaniciCevaplari.push({s: aktifSorular[index].soru, c: secim, d: dogru});
 
-    if(secim === dogru) { btn.classList.add('correct'); dogruS++; }
-    else { 
-        btn.classList.add('wrong'); 
+    if(secim === dogru) {
+        btn.classList.add('correct');
+        dogruS++;
+    } else {
+        btn.classList.add('wrong');
         document.getElementById('btn-' + dogru).classList.add('correct');
         yanlisS++;
     }
@@ -106,39 +122,15 @@ function cevapla(secim, btn) {
         document.getElementById('options-parent').style.pointerEvents = 'auto';
         index++;
         if(index < aktifSorular.length) soruGoster(); else bitir();
-    }, 1200);
+    }, 1000);
 }
 
 function bitir() {
     clearInterval(timer);
-    localStorage.setItem('son_cevaplar', JSON.stringify(kullaniciCevaplari));
+    localStorage.setItem('son_sonuc', JSON.stringify(kullaniciCevaplari));
     document.getElementById('quiz-screen').style.display = 'none';
     document.getElementById('result-screen').style.display = 'block';
-    document.getElementById('result-text').innerHTML = `<b>Doğru:</b> ${dogruS} <br> <b>Yanlış:</b> ${yanlisS}`;
-}
-
-// --- PDF OLUŞTURMA SİSTEMİ ---
-function pdfYap(data, isim, isEgitim=false) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFontSize(10);
-    let y = 20;
-    data.forEach((item, i) => {
-        if(y > 270) { doc.addPage(); y = 20; }
-        let metin = isEgitim ? `${i+1}. ${item.soru} [Cevap: ${item.cevap}]` : `${i+1}. ${item.s.substring(0,50)}... (Sen: ${item.c}, Dogru: ${item.d})`;
-        let lines = doc.splitTextToSize(metin, 180);
-        doc.text(lines, 10, y);
-        y += (lines.length * 7);
-    });
-    doc.save(isim);
-}
-
-function sonucPdfIndir() { pdfYap(kullaniciCevaplari, "Sinav_Sonucu.pdf"); }
-function tumSorulariPdfIndir() { pdfYap(tumVeri, "Egitim_Kitapcigi.pdf", true); }
-function kullaniciCevaplariPdfIndir() {
-    const data = JSON.parse(localStorage.getItem('son_cevaplar'));
-    if(!data) return alert("Geçmiş sınav bulunamadı.");
-    pdfYap(data, "Gecmis_Sonuc.pdf");
+    document.getElementById('result-text').innerHTML = `Doğru: ${dogruS} | Yanlış: ${yanlisS}`;
 }
 
 function startTimer() {
@@ -151,17 +143,6 @@ function startTimer() {
     }, 1000);
 }
 
-function adminGirisKontrol() {
-    if (prompt("Admin Şifresi:") === "anfa2026") {
-        document.getElementById('admin-modal').style.display = 'flex';
-        toggleMenu();
-    } else alert("Yetkisiz Giriş!");
-}
-
-function adminPanelKapat() { 
-    document.getElementById('admin-modal').style.display = 'none'; 
-    location.reload(); 
-}
-
 function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-function istatistikSifirla() { if(confirm("Tüm veriler silinsin mi?")) { localStorage.clear(); location.reload(); } }
+function adminGirisKontrol() { document.getElementById('admin-modal').style.display = 'block'; }
+function adminPanelKapat() { document.getElementById('admin-modal').style.display = 'none'; }
