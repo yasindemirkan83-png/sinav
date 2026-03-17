@@ -7,17 +7,29 @@
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00d2ff">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="apple-touch-icon" href="anfa.gif">
     
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="splash"><img src="anfa.gif" class="splash-gif"></div>
 
     <header id="main-header" style="display:none;">
         <div class="logo"><strong>ANFA</strong> <span>AKADEMİ</span></div>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     </header>
+
+    <div id="side-menu" class="side-menu">
+        <div class="menu-header">AYARLAR</div>
+        <button onclick="istatistikSifirla()"><i class="fas fa-sync"></i> Sistemi Sıfırla</button>
+        <button onclick="tumSorulariPdfIndir()"><i class="fas fa-file-pdf"></i> Eğitim Sorularını İndir</button>
+        <button onclick="location.reload()"><i class="fas fa-redo"></i> Güncellemeleri Denetle</button>
+        <hr>
+        <button onclick="toggleMenu()" class="close-btn">Kapat</button>
+    </div>
 
     <div id="entry-screen" class="container" style="display:none;">
         <div class="glass-card">
@@ -30,7 +42,7 @@
                 <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
                 <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
             </div>
-            <button class="glow-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
+            <button class="glow-btn" id="baslat-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
         </div>
     </div>
 
@@ -40,7 +52,7 @@
             <span id="q-counter">Soru: 1</span>
         </div>
         <div class="question-box glass-card">
-            <p id="q-text">Yükleniyor...</p>
+            <p id="q-text">Soru yükleniyor...</p>
         </div>
         <div class="options-area" id="options-parent">
             <button id="btn-A" class="choice-btn" onclick="cevapla('A', this)"></button>
@@ -54,16 +66,16 @@
     <div id="result-screen" class="container" style="display:none;">
         <div class="glass-card">
             <h2>SINAV SONUCU</h2>
-            <p id="result-text"></p>
-            <button class="glow-btn" onclick="pdfIndir()" style="background: #27ae60; margin-bottom: 10px;">SONUÇLARI PDF İNDİR</button>
-            <button class="glow-btn" onclick="location.reload()">YENİ SINAV</button>
+            <p id="result-text" style="font-size: 1.2rem; line-height: 2;"></p>
+            <button class="glow-btn" onclick="sonucPdfIndir()" style="background: #27ae60; margin-bottom: 15px;"><i class="fas fa-file-download"></i> KENDİ CEVAPLARINI İNDİR</button>
+            <button class="glow-btn" onclick="location.reload()"><i class="fas fa-home"></i> ANA SAYFAYA DÖN</button>
         </div>
     </div>
 
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').then(() => console.log("PWA Aktif"));
+            navigator.serviceWorker.register('./sw.js').then(() => console.log("PWA Aktif"));
         }
     </script>
 </body>
