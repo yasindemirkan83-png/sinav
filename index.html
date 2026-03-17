@@ -52,15 +52,23 @@
     <div id="entry-screen" class="container" style="display:none;">
         <div class="hero-card">
             <h1>Hoş Geldiniz</h1>
-            <p>Sınav türünü seçerek eğitime başlayın.</p>
+            <p>Sınav parametrelerini belirleyin.</p>
+            
             <div class="selection-group">
                 <div id="opt-silahli" class="opt active" onclick="setTur('silahli')">SİLAHLI</div>
                 <div id="opt-silahsiz" class="opt" onclick="setTur('silahsiz')">SİLAHSIZ</div>
             </div>
+
+            <div class="selection-group">
+                <div id="opt-karisik" class="opt active" onclick="setSira('karisik')">KARIŞIK</div>
+                <div id="opt-sirali" class="opt" onclick="setSira('sirali')">SIRALI</div>
+            </div>
+
             <div class="selection-group">
                 <div id="opt-sureli" class="opt active" onclick="setMod('sureli')">SÜRELİ</div>
                 <div id="opt-suresiz" class="opt" onclick="setMod('suresiz')">SÜRESİZ</div>
             </div>
+
             <button class="main-btn" onclick="sinaviBaslat()">SINAVI BAŞLAT</button>
         </div>
     </div>
@@ -70,8 +78,7 @@
             <span id="timer"><i class="fas fa-clock"></i> 165:00</span>
             <span id="q-counter">1 / 120</span>
         </div>
-        <div class="question-container glass-card" id="q-area">
-            </div>
+        <div class="question-container glass-card" id="q-area"></div>
         <div class="options-grid" id="options-parent">
             <button id="btn-A" class="choice-btn" onclick="cevapla('A', this)"></button>
             <button id="btn-B" class="choice-btn" onclick="cevapla('B', this)"></button>
