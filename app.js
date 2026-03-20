@@ -9,12 +9,14 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js');
 }
 
-// Yükleme Butonu Yakalayıcı
+// Yükleme Butonu
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('install-banner').style.display = 'flex';
-    document.getElementById('pwa-header-btn').style.display = 'block';
+    const banner = document.getElementById('install-banner');
+    if(banner) banner.style.display = 'flex';
+    const btn = document.getElementById('pwa-header-btn');
+    if(btn) btn.style.display = 'block';
 });
 
 function installApp() {
@@ -72,7 +74,6 @@ function sinaviBaslat() {
     
     let liste = (tur === 'silahli') ? [...tumVeri] : [...tumVeri.slice(0, 100)];
     
-    // Karışık / Sıralı Mantığı
     if(sira === 'karisik') {
         aktifSorular = liste.sort(() => Math.random() - 0.5);
     } else {
@@ -98,7 +99,7 @@ function soruGoster() {
 
     ['A','B','C','D','E'].forEach(h => {
         const btn = document.getElementById('btn-' + h);
-        btn.innerText = `${h}) ${s[h.toLowerCase()]}`;
+        btn.innerText = `${h}) ${s[h.toLowerCase()] || '---'}`;
         btn.className = 'choice-btn';
     });
     document.getElementById('q-counter').innerText = `${index + 1} / ${aktifSorular.length}`;
@@ -107,7 +108,13 @@ function soruGoster() {
 function cevapla(secim, btn) {
     const dogru = aktifSorular[index].cevap;
     document.getElementById('options-parent').style.pointerEvents = 'none';
-    kullaniciCevaplari.push({s: aktifSorular[index].soru, c: secim, d: dogru});
+    
+    kullaniciCevaplari.push({
+        no: index + 1,
+        soru: aktifSorular[index].soru,
+        verilen: secim,
+        dogru: dogru
+    });
 
     if(secim === dogru) {
         btn.classList.add('correct');
@@ -143,6 +150,59 @@ function startTimer() {
     }, 1000);
 }
 
+// PDF İNDİRME FONKSİYONLARI (Kritik Kısım)
+function sonucPdfIndir() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("ANFA AKADEMI SINAV SONUCU", 10, 10);
+    doc.text(`Dogru: ${dogruS} - Yanlis: ${yanlisS}`, 10, 20);
+    
+    let y = 30;
+    kullaniciCevaplari.forEach((item, i) => {
+        if(y > 280) { doc.addPage(); y = 20; }
+        doc.setFontSize(10);
+        doc.text(`${item.no}. Verilen: ${item.verilen} | Dogru: ${item.dogru}`, 10, y);
+        y += 7;
+    });
+    doc.save("sinav_sonucu.pdf");
+}
+
+function tumSorulariPdfIndir() {
+    if(tumVeri.length === 0) return alert("Veri bulunamadı!");
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("ANFA AKADEMI EGITIM KITAPCIGI", 10, 10);
+    
+    let y = 20;
+    tumVeri.forEach((s, i) => {
+        if(y > 270) { doc.addPage(); y = 20; }
+        doc.setFontSize(9);
+        doc.text(`${i+1}. ${s.soru.substring(0, 80)}...`, 10, y);
+        doc.text(`Cevap: ${s.cevap}`, 10, y + 5);
+        y += 15;
+    });
+    doc.save("egitim_kitapcigi.pdf");
+}
+
+function kullaniciCevaplariPdfIndir() {
+    const data = JSON.parse(localStorage.getItem('son_sonuc'));
+    if(!data) return alert("Henüz kayıtlı bir sınav sonucu yok!");
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text("SON SINAV KAYDI", 10, 10);
+    let y = 20;
+    data.forEach(item => {
+        if(y > 280) { doc.addPage(); y = 20; }
+        doc.text(`${item.no}. Cevabiniz: ${item.verilen} | Dogru: ${item.dogru}`, 10, y);
+        y += 7;
+    });
+    doc.save("gecmis_sonuc.pdf");
+}
+
 function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-function adminGirisKontrol() { document.getElementById('admin-modal').style.display = 'block'; }
-function adminPanelKapat() { document.getElementById('admin-modal').style.display = 'none'; }
+function istatistikSifirla() { 
+    if(confirm("Tüm veriler silinecek?")) {
+        localStorage.clear();
+        location.reload();
+    }
+}
